@@ -22,7 +22,7 @@ Route::get('register','Auth\RegisterController@show');
 
 Route::get('logout',function (){
     Auth::logout();
-    return redirect('/');;
+    return redirect('/');
 });
 
 Route::get('dashboard','DashboardController@index');
