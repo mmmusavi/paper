@@ -17,6 +17,9 @@ Route::get('/', function () {
 
 Route::get('login','LoginController@show');
 Route::post('login','LoginController@checkUser');
+
+Route::get('register','Auth\RegisterController@show');
+
 Route::get('logout',function (){
     Auth::logout();
     return redirect('/');
