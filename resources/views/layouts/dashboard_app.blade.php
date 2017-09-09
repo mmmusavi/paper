@@ -10,6 +10,8 @@
                     <div class="panel-body">
                         <ul class="list-unstyled">
                             <li><a href="/dashboard">داشبورد اصلی</a></li>
+                            <li><a href="/dashboard/papers">مدیریت مقالات</a></li>
+                            <li><a href="/dashboard/volumes">مدیریت شماره‌های مجله</a></li>
                         </ul>
                     </div>
                 </div>
