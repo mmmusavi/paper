@@ -51,6 +51,9 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
+                            @if(Auth::user()->isadmin())
+                                <li><a href="{{ url('/dashboard') }}"><i class="fa fa-dashboard"></i> داشبورد ادمین</a></li>
+                            @endif
                             <li><a href="{{ url('/profile') }}"><i class="fa fa-user-circle"></i> پروفایل من</a></li>
                             <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out"></i> خروج</a></li>
                         </ul>
