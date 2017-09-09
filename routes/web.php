@@ -15,10 +15,15 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('home',function (){
+    return redirect('/');
+});
+
 Route::get('login','LoginController@show');
 Route::post('login','LoginController@checkUser');
 
 Route::get('register','Auth\RegisterController@show');
+Route::post('register','Auth\RegisterController@register');
 
 Route::get('logout',function (){
     Auth::logout();

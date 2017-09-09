@@ -11,7 +11,7 @@
                     @if (Auth::guest())
                     برای ورود روی لینک کلیک کنید.  <a href="{{ url('/login') }}">ورود</a>
                     @else
-                        {{Auth::user()->name}} عزیز، خوش آمدید! <a href="{{ url('/dashboard') }}">ورود به داشبورد</a>
+                        {{Auth::user()->first_name}} {{Auth::user()->last_name}} عزیز، خوش آمدید! <a href="{{ url('/dashboard') }}">ورود به داشبورد</a>
                     @endif
                 </div>
             </div>
