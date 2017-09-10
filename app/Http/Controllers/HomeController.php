@@ -11,7 +11,8 @@ class HomeController extends Controller
         $volumes= \App\Volume::all();
         return view('home',compact('volumes'));
     }
-    public function ViewVolumePapers (){
+    public function ViewVolumePapers ($id){
+        $papers=\App\Volume::find($id)->papers;
         return view('volume');
     }
 }

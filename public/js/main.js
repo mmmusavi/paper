@@ -15,16 +15,18 @@ $(document).ready(function(){
         var $this=$(this);
         var pvalue=$this.val();
         if(pvalue.length>2) {
-            var dataString = 'value=' + pvalue + '&_token=' + $('[name="_token"]').val();
+
+            var dataString = {
+                value: pvalue
+            }
 
             $.ajax
             ({
+                headers: { 'X-CSRF-Token' : $('[name="_token"]').val() },
                 type: "POST",
-                url: "/Process/GetProfile/",
+                url: "/Process/GetProfile",
                 data: dataString,
-                cache: false,
                 success: function (response) {
-                    console.log( response );
                     $('.profile_target').html(response);
                     $this.next().show();
                     $(document).mouseup(function (e)
