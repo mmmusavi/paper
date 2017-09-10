@@ -37,7 +37,8 @@ class DashboardController extends Controller
     }
 
     public function NewPaperShow(){
-        return view('dashboard.newpaper');
+        $volumes=\App\Volume::all();
+        return view('dashboard.newpaper',compact('volumes'));
     }
 
     public function NewPaperPost(Request $request){
@@ -59,7 +60,8 @@ class DashboardController extends Controller
 
     public function EditPaperShow($id){
         $papers=\App\Paper::find($id);
-        return view('dashboard.newpaper',compact(['papers','id']));
+        $volumes=\App\Volume::all();
+        return view('dashboard.newpaper',compact(['papers','id','volumes']));
     }
 
     public function EditPaper(Request $request,$id){
@@ -122,5 +124,17 @@ class DashboardController extends Controller
         $volume->save();
         \Session::flash('message','با موفقیت ویرایش شد.');
         return redirect('/dashboard/volumes/edit/'.$id);
+    }
+
+    public function GetProfile(Request $request){
+        $users=\App\User::where("first_name", "LIKE","%".$request."%")
+            ->orWhere("last_name", "LIKE","%".$request."%")
+            ->get();
+        return \Response::json($request);
+        //if(!empty($users)){
+        //    foreach ($users as $user){
+        //        echo '<a href="#" class="user_select" data-userid="'.$user->id.'">'.$user->first_name.' '.$user->last_name.' ('.$user->email.')</a><br>';
+        //    }
+        //}else echo 'موردی پیدا نشد';
     }
 }
