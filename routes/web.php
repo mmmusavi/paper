@@ -48,3 +48,4 @@ Route::post('/Process/GetProfile','DashboardController@GetProfile');
 
 //
 Route::get('/' , 'HomeController@index');
+Route::get('/volume/{id}' , 'HomeController@ViewVolumePapers');
