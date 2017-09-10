@@ -130,11 +130,6 @@ class DashboardController extends Controller
         $users=\App\User::where("first_name", "LIKE","%".$request."%")
             ->orWhere("last_name", "LIKE","%".$request."%")
             ->get();
-        return \Response::json($request);
-        //if(!empty($users)){
-        //    foreach ($users as $user){
-        //        echo '<a href="#" class="user_select" data-userid="'.$user->id.'">'.$user->first_name.' '.$user->last_name.' ('.$user->email.')</a><br>';
-        //    }
-        //}else echo 'موردی پیدا نشد';
+        return View::make('dashboard.getprofile',compact('users'));
     }
 }

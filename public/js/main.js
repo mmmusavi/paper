@@ -15,7 +15,8 @@ $(document).ready(function(){
         var $this=$(this);
         var pvalue=$this.val();
         if(pvalue.length>2) {
-            var dataString = 'value=' + pvalue;
+            var dataString = 'value=' + pvalue + '&_token=' + $('[name="_token"]').val();
+
             $.ajax
             ({
                 type: "POST",
@@ -23,7 +24,7 @@ $(document).ready(function(){
                 data: dataString,
                 cache: false,
                 success: function (response) {
-                    alert(response);
+                    console.log( response );
                     $('.profile_target').html(response);
                     $this.next().show();
                     $(document).mouseup(function (e)
