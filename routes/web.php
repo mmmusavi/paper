@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
-
 Route::get('/home',function (){
     return redirect('/');
 });
@@ -51,4 +47,4 @@ Route::post('/dashboard/volumes/edit/{id}','DashboardController@EditVolume');
 Route::post('/Process/GetProfile','DashboardController@GetProfile');
 
 //
-Route::post('/home' , 'HomeController@index');
+Route::get('/' , 'HomeController@index');
