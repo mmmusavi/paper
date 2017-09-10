@@ -9,7 +9,7 @@
 
                 <div class="panel-body">
                     @foreach($volumes as $volume)
-                        <p>{{$volume->name}}</p>
+                        <p><a href="/volume/{{$volume->id}}">{{$volume->name}}</a></p>
                     @endforeach
                 </div>
             </div>
