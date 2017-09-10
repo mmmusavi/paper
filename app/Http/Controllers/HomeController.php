@@ -13,6 +13,6 @@ class HomeController extends Controller
     }
     public function ViewVolumePapers ($id){
         $papers=\App\Volume::find($id)->papers;
-        return view('volume');
+        return view('volume' ,compact('papers'));
     }
 }
