@@ -44,11 +44,81 @@ class DashboardController extends Controller
     public function NewPaperPost(Request $request){
         $this->validate($request, [
             'title' => 'required',
+            'keywords' => 'required',
+            'abstract' => 'required',
+            'volume_id' => 'required',
+            'pdf' => 'required|max:8000|mimes:pdf',
         ]);
 
+        $authornew=$request->authornew;
+        $author=$request->author;
+        $email=$request->email;
+        $affiliationnew=$request->affiliationnew;
+        $affiliation=$request->affiliation;
+        $users_id=[];
+        $affiliations_id=[];
+        $authors_order='';
+
+        for($i=0;$i<=sizeof($email)-1;$i++){
+            if(empty($author[$i])){
+                $user=new \App\User;
+                $user->last_name=$authornew[$i];
+                $user->email=$email[$i];
+                $user->save();
+                $authors_order.=$user->id.';';
+                array_push($users_id,$user->id);
+            }else{
+                $authors_order.=$author[$i].';';
+                array_push($users_id,$author[$i]);
+            }
+            if(empty($affiliation[$i])){
+                $aff=new \App\Affiliation;
+                $aff->name=$affiliationnew[$i];
+                $aff->save();
+                array_push($affiliations_id,$aff->id);
+            }else{
+                array_push($affiliations_id,$affiliation[$i]);
+            }
+        }
+
         $paper=new \App\Paper;
-        $paper->fill($request->all());
+        $paper->title=$request->title;
+
+        $keywords = explode(";", $request->keywords);
+        $keywords_order='';
+        $keywords_id=[];
+        foreach ($keywords as $keyword){
+            $newkeyword=new \App\Keyword;
+            $newkeyword->name=$keyword;
+            $newkeyword->save();
+            $newkeyword_id=$newkeyword->id;
+            $keywords_order.=$newkeyword_id.';';
+            array_push($keywords_id,$newkeyword_id);
+        }
+        $paper->authors_order=$authors_order;
+        $paper->keywords_order=$keywords_order;
+        $paper->abstract=$request->abstract;
+        $paper->volume_id=$request->volume_id;
         $paper->save();
+
+        foreach ($keywords_id as $keyword){
+            $newkeyword=new \App\PaperKeyword;
+            $newkeyword->paper_id=$paper->id;
+            $newkeyword->keyword_id=$keyword;
+            $newkeyword->save();
+        }
+
+        for($i=0;$i<=sizeof($email)-1;$i++){
+            $paperUser=new \App\PaperUser;
+            $paperUser->paper_id=$paper->id;
+            $paperUser->user_id=$users_id[$i];
+            $paperUser->affiliation_id=$affiliations_id[$i];
+            $paperUser->email=$email[$i];
+            $paperUser->save();
+        }
+
+        $extention=$request->file('pdf')->extension();
+        $request->file('pdf')->storeAs('PaperFiles',$paper->id.'.'.$extention);
 
         return redirect('/dashboard/papers');
     }

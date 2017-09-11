@@ -10,14 +10,14 @@ $(document).ready(function(){
         var selectAuthor='<div class="form-group authors-div">'+
             '<label for="author" class="col-md-2 control-label">نام نویسنده '+number+'</label>'+
             '<div class="col-md-6">'+
-            '<input id="author" data-number="'+number+'" type="text" placeholder="تایپ کنید" class="form-control get_profile">'+
+            '<input id="author" data-number="'+number+'" type="text" placeholder="تایپ کنید" class="form-control get_profile" name="authornew[]">'+
             '<div class="instant_box profile_target"></div>'+
             '<input name="author[]" data-number="'+number+'" type="hidden" class="author"></div></div>'+
             '<div class="form-group authors-div"><label for="email" class="col-md-2 control-label">ایمیل نویسنده '+number+'</label>'+
             '<div class="col-md-6"><input id="email" data-number="'+number+'" type="text" class="form-control email" name="email[]"></div></div>'+
             '<div class="form-group authors-div"><label for="affiliation" class="col-md-2 control-label">وابستگی نویسنده '+number+'</label>'+
             '<div class="col-md-6">'+
-            '<textarea id="affiliation" data-number="'+number+'" placeholder="تایپ کنید" class="form-control get_affiliation"></textarea>'+
+            '<textarea id="affiliation" data-number="'+number+'" placeholder="تایپ کنید" class="form-control get_affiliation" name="affiliationnew[]"></textarea>'+
             '<div class="instant_box affiliation_target"></div>'+'' +
             '<input name="affiliation[]" data-number="'+number+'" type="hidden" class="affiliation"></div></div>';
         $('.authors-div').last().after(selectAuthor);

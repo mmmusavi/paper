@@ -20,7 +20,7 @@ class CreatePapersTable extends Migration
             $table->string('keywords_order');
             $table->integer('volume_id');
             $table->text('abstract');
-            $table->integer('views');
+            $table->integer('views')->default(0);
             $table->timestamps();
         });
     }

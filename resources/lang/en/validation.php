@@ -56,7 +56,7 @@ return [
         'string'  => 'فیلد :attribute نباید بیشتر از :max کاراکتر باشد.',
         'array'   => 'فیلد :attribute نباید بیشتر از :max مورد باشد.',
     ],
-    'mimes'                => 'فیلد :attribute باید be a file of type: :values.',
+    'mimes'                => 'فیلد :attribute باید فایل با پسوند :values باشد.',
     'mimetypes'            => 'فیلد :attribute باید be a file of type: :values.',
     'min'                  => [
         'numeric' => 'فیلد :attribute نباید کمتر از :min باشد.',
@@ -122,6 +122,9 @@ return [
         'email' => 'ایمیل',
         'password' => 'رمزعبور',
         'title' => 'عنوان',
+        'keywords' => 'کلمه‌های کلیدی',
+        'abstract' => 'چکیده',
+        'volume_id' => 'شماره',
     ],
 
 ];

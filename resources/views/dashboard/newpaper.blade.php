@@ -39,7 +39,7 @@
             <label for="author" class="col-md-2 control-label">نام نویسنده 1</label>
 
             <div class="col-md-6">
-                <input id="author" data-number="1" type="text" placeholder="تایپ کنید" class="form-control get_profile">
+                <input id="author" data-number="1" type="text" placeholder="تایپ کنید" class="form-control get_profile" name="authornew[]">
                 <div class="instant_box profile_target"></div>
                 <input name="author[]" data-number="1" type="hidden" class="author">
             </div>
@@ -57,7 +57,7 @@
             <label for="affiliation" class="col-md-2 control-label">وابستگی نویسنده 1</label>
 
             <div class="col-md-6">
-                <textarea id="affiliation" data-number="1" placeholder="تایپ کنید" class="form-control get_affiliation"></textarea>
+                <textarea id="affiliation" data-number="1" placeholder="تایپ کنید" class="form-control get_affiliation" name="affiliationnew[]"></textarea>
                 <div class="instant_box affiliation_target"></div>
                 <input name="affiliation[]" data-number="1" type="hidden" class="affiliation">
             </div>
@@ -104,7 +104,7 @@
         </div>
 
         <div class="form-group">
-            <label for="pdf" class="col-md-2 control-label">فایل pdf</label>
+            <label for="pdf" class="col-md-2 control-label">فایل pdf<span class="label-desc">حداکثر 8 مگابایت</span></label>
 
             <div class="col-md-6">
                 <input id="pdf" type="file" class="form-control" name="pdf">

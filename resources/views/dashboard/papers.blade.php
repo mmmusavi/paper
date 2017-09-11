@@ -18,7 +18,7 @@
             <tr>
                 <td class="text-center">{{ $paper->title }}</td>
                 <td class="text-center">
-                    <a title="ویرایش" href="/dashboard/papres/edit/{{ $paper->id }}"><i class="fa fa-pencil-square"></i></a>
+                    <a title="ویرایش" href="/dashboard/papers/edit/{{ $paper->id }}"><i class="fa fa-pencil-square"></i></a>
                     <a title="حذف" href="/dashboard/papers/delete/{{ $paper->id }}"><i class="fa fa-remove"></i></a>
                 </td>
             </tr>

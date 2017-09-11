@@ -4,7 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Affiliation extends Model
+class PaperKeyword extends Model
 {
     protected $guarded=[];
+    protected $table='paper_keyword';
 }
