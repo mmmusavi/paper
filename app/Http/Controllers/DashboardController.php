@@ -127,8 +127,8 @@ class DashboardController extends Controller
     }
 
     public function GetProfile(Request $request){
-        $users=\App\User::where("first_name", "LIKE","%".$request."%")
-            ->orWhere("last_name", "LIKE","%".$request."%")
+        $users=\App\User::where("first_name", "LIKE","%".$request->author."%")
+            ->orWhere("last_name", "LIKE","%".$request->author."%")
             ->get();
 
         $string='';
