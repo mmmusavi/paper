@@ -126,18 +126,38 @@ class DashboardController extends Controller
         return redirect('/dashboard/volumes/edit/'.$id);
     }
 
+    //
+    //
+    // AJAX
+    //
+    //
     public function GetProfile(Request $request){
-        $users=\App\User::where("first_name", "LIKE","%".$request->author."%")
-            ->orWhere("last_name", "LIKE","%".$request->author."%")
+        $users=\App\User::where("first_name", "LIKE","%".$request->value."%")
+            ->orWhere("last_name", "LIKE","%".$request->value."%")
             ->get();
 
         $string='';
         if($users->count()){
             foreach ($users as $user){
-                $string.='<a href="#" class="user_select" data-userid="'.$user->id.'">'.$user->first_name.' '.$user->last_name.' ('.$user->email.')</a><br>';
+                $string.='<a href="#" class="instant_link user_select" 
+                data-email="'.$user->email.'"
+                data-name="'.$user->first_name.' '.$user->last_name.'"
+                data-number="'.$request->numer.'"
+                data-userid="'.$user->id.'">'.$user->first_name.' '.$user->last_name.' ('.$user->email.')</a>';
             }
         }else $string.='موردی پیدا نشد';
         return $string;
-        //return View::make('dashboard.getprofile',compact('users'));
+    }
+
+    public function GetAffiliation(Request $request){
+        $affiliations=\App\Affiliation::where("name", "LIKE","%".$request->value."%")->get();
+
+        $string='';
+        if($affiliations->count()>0){
+            foreach ($affiliations as $affiliation){
+                $string.='<a href="#" class="instant_link affiliation_select" data-affiliationid="'.$affiliation->id.'">'.$affiliation->name.'</a>';
+            }
+        }else $string.='موردی پیدا نشد';
+        return $string;
     }
 }

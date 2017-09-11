@@ -45,6 +45,7 @@ Route::get('/dashboard/volumes/edit/{id}','DashboardController@EditVolumeShow');
 Route::post('/dashboard/volumes/edit/{id}','DashboardController@EditVolume');
 
 Route::post('/Process/GetProfile','DashboardController@GetProfile');
+Route::post('/Process/GetAffiliation','DashboardController@GetAffiliation');
 
 //
 Route::get('/' , 'HomeController@index');
