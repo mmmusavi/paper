@@ -3,30 +3,40 @@
  */
 $(document).ready(function(){
 
-    var number=1;
     $('.add-author').click(function (e) {
         e.preventDefault();
-        number=number+1;
-        var selectAuthor='<div class="form-group authors-div">'+
-            '<label for="author" class="col-md-2 control-label">نام نویسنده '+number+'</label>'+
+        var number=parseInt($('.authors-div').last().attr('data-number'))+1;
+        var selectAuthor='<div class="form-group authors-div" data-number="'+number+'">'+
+            '<label for="author" class="col-md-2 control-label">نام نویسنده</label>'+
             '<div class="col-md-6">'+
-            '<input id="author" data-number="'+number+'" type="text" placeholder="تایپ کنید" class="form-control get_profile" name="authornew[]">'+
+            '<input autocomplete="off" id="author" data-number="'+number+'" type="text" placeholder="نام و یا نام خانوادگی را تایپ کنید" class="form-control get_profile" name="authornew[]">'+
             '<div class="instant_box profile_target"></div>'+
-            '<input name="author[]" data-number="'+number+'" type="hidden" class="author"></div></div>'+
-            '<div class="form-group authors-div"><label for="email" class="col-md-2 control-label">ایمیل نویسنده '+number+'</label>'+
+            '<input name="author[]" data-number="'+number+'" type="hidden" class="author">'+
+            '</div>'+
+            '<div class="col-md-2" style="padding: 0">'+
+            '<a href="#" data-number="'+number+'" class="btn btn-danger remove-author"><i class="fa fa-remove"></i> حذف نویسنده</a>'+
+            '</div>'+
+            '</div>'+
+            '<div class="form-group authors-div" data-number="'+number+'"><label for="email" class="col-md-2 control-label">ایمیل نویسنده</label>'+
             '<div class="col-md-6"><input id="email" data-number="'+number+'" type="text" class="form-control email" name="email[]"></div></div>'+
-            '<div class="form-group authors-div"><label for="affiliation" class="col-md-2 control-label">وابستگی نویسنده '+number+'</label>'+
+            '<div class="form-group authors-div" data-number="'+number+'"><label for="affiliation" class="col-md-2 control-label">وابستگی نویسنده</label>'+
             '<div class="col-md-6">'+
-            '<textarea id="affiliation" data-number="'+number+'" placeholder="تایپ کنید" class="form-control get_affiliation" name="affiliationnew[]"></textarea>'+
+            '<textarea autocomplete="off" id="affiliation" data-number="'+number+'" placeholder="تایپ کنید" class="form-control get_affiliation" name="affiliationnew[]"></textarea>'+
             '<div class="instant_box affiliation_target"></div>'+'' +
             '<input name="affiliation[]" data-number="'+number+'" type="hidden" class="affiliation"></div></div>';
         $('.authors-div').last().after(selectAuthor);
     });
 
+    $(document).on('click','.remove-author',function (e) {
+        e.preventDefault();
+        var number=$(this).attr('data-number');
+        $('.authors-div[data-number="'+number+'"]').remove();
+    });
+
     $(document).on('keyup','.get_profile',function () {
         var $this=$(this);
         var pvalue=$this.val();
-        if(pvalue.length>2) {
+        if(pvalue.length>=2) {
 
             var dataString = {
                 value: pvalue,
@@ -55,7 +65,11 @@ $(document).ready(function(){
                     $('.user_select').click(function (e) {
                         e.preventDefault();
                         var userid=$(this).attr('data-userid');
-                        $this.val($(this).attr('data-name'));
+                        if(userid==0){
+                            $this.val(pvalue);
+                        }else{
+                            $this.val($(this).attr('data-name'));
+                        }
                         $('.author[data-number="'+$this.attr('data-number')+'"]').val(userid);
                         $('.email[data-number="'+$this.attr('data-number')+'"]').val($(this).attr('data-email'));
                         $('.profile_target').hide();
@@ -68,7 +82,7 @@ $(document).ready(function(){
     $(document).on('keyup','.get_affiliation',function () {
         var $this=$(this);
         var pvalue=$this.val();
-        if(pvalue.length>2) {
+        if(pvalue.length>=2) {
 
             var dataString = {
                 value: pvalue
@@ -96,7 +110,11 @@ $(document).ready(function(){
                     $('.affiliation_select').click(function (e) {
                         e.preventDefault();
                         var userid=$(this).attr('data-affiliationid');
-                        $this.val($(this).html());
+                        if(userid==0){
+                            $this.val(pvalue);
+                        }else{
+                            $this.val($(this).html());
+                        }
                         $('.affiliation[data-number="'+$this.attr('data-number')+'"]').val(userid);
                         $('.affiliation_target').hide();
                     });

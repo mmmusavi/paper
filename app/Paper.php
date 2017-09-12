@@ -9,6 +9,22 @@ class Paper extends Model
     protected $guarded=[];
 
     public function volume(){
-        return $this->belongsTo('/App/Volume');
+        return $this->belongsTo('App\Volume');
+    }
+
+    public function users(){
+        return $this->belongsToMany('App\User')->withPivot('affiliation_id')->withPivot('email');
+    }
+
+    public function affiliations(){
+        return $this->belongsToMany('App\Affiliation','paper_user');
+    }
+
+    public function authors(){
+        return $this->hasMany('App\PaperUser');
+    }
+
+    public function keywords(){
+        return $this->belongsToMany('App\Keyword','paper_keyword');
     }
 }

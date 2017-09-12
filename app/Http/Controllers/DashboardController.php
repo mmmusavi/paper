@@ -47,7 +47,7 @@ class DashboardController extends Controller
             'keywords' => 'required',
             'abstract' => 'required',
             'volume_id' => 'required',
-            'pdf' => 'required|max:8000|mimes:pdf',
+            'pdf' => 'max:8000|mimes:pdf',
         ]);
 
         $authornew=$request->authornew;
@@ -60,7 +60,7 @@ class DashboardController extends Controller
         $authors_order='';
 
         for($i=0;$i<=sizeof($email)-1;$i++){
-            if(empty($author[$i])){
+            if(empty($author[$i]) or $author[$i]==0){
                 $user=new \App\User;
                 $user->last_name=$authornew[$i];
                 $user->email=$email[$i];
@@ -71,7 +71,7 @@ class DashboardController extends Controller
                 $authors_order.=$author[$i].';';
                 array_push($users_id,$author[$i]);
             }
-            if(empty($affiliation[$i])){
+            if(empty($affiliation[$i]) or $affiliation[$i]==0){
                 $aff=new \App\Affiliation;
                 $aff->name=$affiliationnew[$i];
                 $aff->save();
@@ -88,12 +88,18 @@ class DashboardController extends Controller
         $keywords_order='';
         $keywords_id=[];
         foreach ($keywords as $keyword){
-            $newkeyword=new \App\Keyword;
-            $newkeyword->name=$keyword;
-            $newkeyword->save();
-            $newkeyword_id=$newkeyword->id;
-            $keywords_order.=$newkeyword_id.';';
-            array_push($keywords_id,$newkeyword_id);
+            $checkkeyword=\App\Keyword::where('name',$keyword)->first();
+            if(count($checkkeyword)>0){
+                $keywords_order.=$checkkeyword->id.';';
+                array_push($keywords_id,$checkkeyword->id);
+            }else {
+                $newkeyword = new \App\Keyword;
+                $newkeyword->name = $keyword;
+                $newkeyword->save();
+                $newkeyword_id = $newkeyword->id;
+                $keywords_order .= $newkeyword_id . ';';
+                array_push($keywords_id, $newkeyword_id);
+            }
         }
         $paper->authors_order=$authors_order;
         $paper->keywords_order=$keywords_order;
@@ -129,20 +135,117 @@ class DashboardController extends Controller
     }
 
     public function EditPaperShow($id){
-        $papers=\App\Paper::find($id);
+        $paper=\App\Paper::find($id);
+        $authors=$paper->users;
+        foreach ($authors as $user){
+            $aff=\App\Affiliation::find($user->pivot->affiliation_id);
+            $user->affiliation=$aff->name;
+            $user->email=$user->pivot->email;
+        }
+        $keywords='';
+        $allkeywords=explode(';',$paper->keywords_order);
+        foreach ($allkeywords as $allkeyword){
+            if(!empty($allkeyword)){
+                $key=\App\Keyword::find($allkeyword);
+                $keywords.=$key->name.';';
+            }
+        }
         $volumes=\App\Volume::all();
-        return view('dashboard.newpaper',compact(['papers','id','volumes']));
+        return view('dashboard.editpaper',compact(['paper','id','volumes','authors','keywords']));
     }
 
     public function EditPaper(Request $request,$id){
 
         $this->validate($request, [
             'title' => 'required',
+            'keywords' => 'required',
+            'abstract' => 'required',
+            'volume_id' => 'required',
         ]);
 
         $paper=\App\Paper::find($id);
-        $paper->fill($request->all());
+
+        $authornew=$request->authornew;
+        $author=$request->author;
+        $email=$request->email;
+        $affiliationnew=$request->affiliationnew;
+        $affiliation=$request->affiliation;
+        $users_id=[];
+        $affiliations_id=[];
+        $authors_order='';
+
+        for($i=0;$i<=sizeof($email)-1;$i++){
+            if(empty($author[$i]) or $author[$i]==0){
+                $user=new \App\User;
+                $user->last_name=$authornew[$i];
+                $user->email=$email[$i];
+                $user->save();
+                $authors_order.=$user->id.';';
+                array_push($users_id,$user->id);
+            }else{
+                $authors_order.=$author[$i].';';
+                array_push($users_id,$author[$i]);
+            }
+            if(empty($affiliation[$i]) or $affiliation[$i]==0){
+                $aff=new \App\Affiliation;
+                $aff->name=$affiliationnew[$i];
+                $aff->save();
+                array_push($affiliations_id,$aff->id);
+            }else{
+                array_push($affiliations_id,$affiliation[$i]);
+            }
+        }
+
+        $keywords = explode(";", $request->keywords);
+        $keywords_order='';
+        $keywords_id=[];
+        foreach ($keywords as $keyword){
+            $checkkeyword=\App\Keyword::where('name',$keyword)->first();
+            if(count($checkkeyword)>0){
+                $keywords_order.=$checkkeyword->id.';';
+                array_push($keywords_id,$checkkeyword->id);
+            }else{
+                $newkeyword=new \App\Keyword;
+                $newkeyword->name=$keyword;
+                $newkeyword->save();
+                $newkeyword_id=$newkeyword->id;
+                $keywords_order.=$newkeyword_id.';';
+                array_push($keywords_id,$newkeyword_id);
+            }
+        }
+
+        $paper->title=$request->title;
+        $paper->authors_order=$authors_order;
+        $paper->keywords_order=$keywords_order;
+        $paper->abstract=$request->abstract;
+        $paper->volume_id=$request->volume_id;
         $paper->save();
+
+        \App\PaperKeyword::where('paper_id',$id)->delete();
+
+        foreach ($keywords_id as $keyword){
+            $newkeyword=new \App\PaperKeyword;
+            $newkeyword->paper_id=$paper->id;
+            $newkeyword->keyword_id=$keyword;
+            $newkeyword->save();
+        }
+
+        \App\PaperUser::where('paper_id',$id)->delete();
+
+        for($i=0;$i<=sizeof($email)-1;$i++){
+            $paperUser=new \App\PaperUser;
+            $paperUser->paper_id=$paper->id;
+            $paperUser->user_id=$users_id[$i];
+            $paperUser->affiliation_id=$affiliations_id[$i];
+            $paperUser->email=$email[$i];
+            $paperUser->save();
+        }
+
+        if($request->hasFile('pdf')){
+            $extention=$request->file('pdf')->extension();
+            $request->file('pdf')->storeAs('PaperFiles',$id.'.'.$extention);
+        }
+
         \Session::flash('message','با موفقیت ویرایش شد.');
         return redirect('/dashboard/papers/edit/'.$id);
     }
@@ -207,15 +310,15 @@ class DashboardController extends Controller
             ->get();
 
         $string='';
-        if($users->count()){
+        if($users->count()>0){
             foreach ($users as $user){
                 $string.='<a href="#" class="instant_link user_select" 
                 data-email="'.$user->email.'"
                 data-name="'.$user->first_name.' '.$user->last_name.'"
-                data-number="'.$request->numer.'"
+                data-number="'.$request->number.'"
                 data-userid="'.$user->id.'">'.$user->first_name.' '.$user->last_name.' ('.$user->email.')</a>';
             }
-        }else $string.='موردی پیدا نشد';
+        }else $string.='<a href="#" class="instant_link user_select" data-number="'.$request->number.'" data-userid="0">موردی پیدا نشد. ایجاد شود؟</a>';
         return $string;
     }
 
@@ -225,9 +328,9 @@ class DashboardController extends Controller
         $string='';
         if($affiliations->count()>0){
             foreach ($affiliations as $affiliation){
-                $string.='<a href="#" class="instant_link affiliation_select" data-affiliationid="'.$affiliation->id.'">'.$affiliation->name.'</a>';
+                $string.='<a href="#" data-number="'.$request->number.'" class="instant_link affiliation_select" data-affiliationid="'.$affiliation->id.'">'.$affiliation->name.'</a>';
             }
-        }else $string.='موردی پیدا نشد';
+        }else $string.='<a href="#" data-number="'.$request->number.'" class="instant_link affiliation_select" data-affiliationid="0">موردی پیدا نشد. ایجاد شود؟</a>';
         return $string;
     }
 }

@@ -20,20 +20,20 @@
                         {{ csrf_field() }}
 
                         <div class="form-group">
-                            <label for="first_name" class="col-md-4 control-label">نام</label>
-
-                            <div class="col-md-6">
-                                <input id="first_name" type="text" class="form-control" name="first_name" value="{{ old('first_name') }}">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="last_name" class="col-md-4 control-label">نام خانوادگی</label>
+                            <label for="last_name" class="col-md-4 control-label">نام</label>
 
                             <div class="col-md-6">
                                 <input id="last_name" type="text" class="form-control" name="last_name" value="{{ old('last_name') }}">
                             </div>
                         </div>
+
+                        <!--<div class="form-group">
+                            <label for="last_name" class="col-md-4 control-label">نام خانوادگی</label>
+
+                            <div class="col-md-6">
+                                <input id="last_name" type="text" class="form-control" name="last_name" value="{{ old('last_name') }}">
+                            </div>
+                        </div>-->
 
                         <div class="form-group">
                             <label for="email" class="col-md-4 control-label">ایمیل</label>

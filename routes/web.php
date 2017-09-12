@@ -47,6 +47,11 @@ Route::post('/dashboard/volumes/edit/{id}','DashboardController@EditVolume');
 Route::post('/Process/GetProfile','DashboardController@GetProfile');
 Route::post('/Process/GetAffiliation','DashboardController@GetAffiliation');
 
+Route::get('storage/PaperFiles/{filename}', function ($filename)
+{
+    $path = storage_path().'\\app\\PaperFiles\\'.$filename;
+    return Response::download($path);
+});
 //
 Route::get('/' , 'HomeController@index');
 Route::get('/volume/{id}' , 'HomeController@ViewVolumePapers');
