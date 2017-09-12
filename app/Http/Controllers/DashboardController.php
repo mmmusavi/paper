@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Paper;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -277,7 +278,10 @@ class DashboardController extends Controller
     }
 
     public function DeleteVolume($id){
-        \App\Volume::destroy($id);
+        $papers=\App\Volume::find($id)->papers;
+        if(count($papers)==0){
+            \App\Volume::destroy($id);
+        }
         return redirect('/dashboard/volumes');
     }
 
@@ -297,6 +301,76 @@ class DashboardController extends Controller
         $volume->save();
         \Session::flash('message','با موفقیت ویرایش شد.');
         return redirect('/dashboard/volumes/edit/'.$id);
+    }
+
+    //
+    //
+    // AFFILIATIONS
+    //
+    //
+    public function AffiliationsList(){
+        $affiliations=\App\Affiliation::all();
+        return view('dashboard.affiliations',compact('affiliations'));
+    }
+
+    public function DeleteAffiliation($id){
+        $papers=\App\Affiliation::find($id)->papers;
+        if(count($papers)==0){
+            \App\Affiliation::destroy($id);
+        }
+        return redirect('/dashboard/affiliations');
+    }
+
+    public function EditAffiliationShow($id){
+        $affiliation=\App\Affiliation::find($id);
+        return view('dashboard.editaffiliation',compact('affiliation'));
+    }
+
+    public function EditAffiliation(Request $request,$id){
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+
+        $affiliation=\App\Affiliation::find($id);
+        $affiliation->name=$request['name'];
+        $affiliation->save();
+        \Session::flash('message','با موفقیت ویرایش شد.');
+        return redirect('/dashboard/affiliations/edit/'.$id);
+    }
+
+    //
+    //
+    // KEYWORDS
+    //
+    //
+    public function KeywordsList(){
+        $keywords=\App\Keyword::all();
+        return view('dashboard.keywords',compact('keywords'));
+    }
+
+    public function DeleteKeyword($id){
+        $papers=\App\Keyword::find($id)->papers;
+        if(count($papers)==0){
+            \App\Keyword::destroy($id);
+        }
+        return redirect('/dashboard/keywords');
+    }
+
+    public function EditKeywordShow($id){
+        $keyword=\App\Keyword::find($id);
+        return view('dashboard.editkeyword',compact('keyword'));
+    }
+
+    public function EditKeyword(Request $request,$id){
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+
+        $keyword=\App\Keyword::find($id);
+        $keyword->name=$request['name'];
+        $keyword->save();
+        \Session::flash('message','با موفقیت ویرایش شد.');
+        return redirect('/dashboard/keywords/edit/'.$id);
     }
 
     //
