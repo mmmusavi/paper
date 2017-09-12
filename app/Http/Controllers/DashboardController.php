@@ -375,6 +375,43 @@ class DashboardController extends Controller
 
     //
     //
+    // USERS
+    //
+    //
+    public function UsersList(){
+        $users=\App\User::all();
+        return view('dashboard.users',compact('users'));
+    }
+
+    public function DeleteUser($id){
+        $users=\App\User::find($id)->papers;
+        if(count($users)==0){
+            \App\User::destroy($id);
+        }
+        return redirect('/dashboard/users');
+    }
+
+    public function EditUserShow($id){
+        $user=\App\User::find($id);
+        return view('dashboard.edituser',compact('user'));
+    }
+
+    public function EditUser(Request $request,$id){
+        $this->validate($request, [
+            'last_name' => 'required',
+            'email' => 'required|email|unique:users',
+        ]);
+
+        $user=\App\User::find($id);
+        $user->last_name=$request['last_name'];
+        $user->email=$request['email'];
+        $user->save();
+        \Session::flash('message','با موفقیت ویرایش شد.');
+        return redirect('/dashboard/users/edit/'.$id);
+    }
+
+    //
+    //
     // AJAX
     //
     //

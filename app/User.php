@@ -31,6 +31,10 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Role');
     }
 
+    public function papers(){
+        return $this->belongsToMany('App\Paper');
+    }
+
     public function isadmin(){
         $user=\Auth::user();
         $foundAdmin=0;
