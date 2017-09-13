@@ -4,18 +4,12 @@
     <div class="container">
         <div class="row">
             <div class="panel panel-default">
-                @foreach($papers as $paper)
-                    <div class="panel-heading">{{$paper->title}}</div>
-                @endforeach
+                    <div class="panel-heading">{{$papers->title}}</div>
                 <div class="panel-body">
                     <h5>نویسندگان</h5>
-                    @foreach($papers as $paper)
-                        <p>&nbsp;{{$paper->authors_order}}</p>
-                    @endforeach
+                        <p>&nbsp;{{$papers->authors_order}}</p>
                     <h5>خلاصه مقاله</h5>
-                    @foreach($papers as $paper)
-                        <p>&nbsp;{{$paper->abstract}}</p>
-                     @endforeach
+                        <p>&nbsp;{{$papers->abstract}}</p>
                 </div>
             </div>
         </div>
