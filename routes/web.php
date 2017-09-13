@@ -76,3 +76,6 @@ Route::get('/volume/{id}' , 'HomeController@ViewVolumePapers');
 
 //paper page
 Route::get('/paper/{id}','HomeController@ViewPaper');
+
+Route::get('/profile','ProfileController@index');
+Route::get('/profile/account','ProfileController@account');
