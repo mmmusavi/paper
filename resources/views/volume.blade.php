@@ -17,7 +17,7 @@
                         <tbody>
                          @foreach($papers as $paper)
                              <tr>
-                                 <td>{{$paper->title}}</td>
+                                 <td><a href="/paper/{{$paper->id}}">{{$paper->title}}</a></td>
                              </tr>
                          @endforeach
                         </tbody>

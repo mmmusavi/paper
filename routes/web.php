@@ -70,6 +70,9 @@ Route::get('storage/PaperFiles/{filename}', function ($filename)
     $path = storage_path().'\\app\\PaperFiles\\'.$filename;
     return Response::download($path);
 });
-//
+//volume page
 Route::get('/' , 'HomeController@index');
 Route::get('/volume/{id}' , 'HomeController@ViewVolumePapers');
+
+//paper page
+Route::get('/paper/{id}','HomeController@ViewPaper');
