@@ -22,6 +22,12 @@
                         <h5>تعداد بازدید</h5>
                         <p>{{$views}}</p>
                     </div>
+                        <div class="col-md-5">
+                            <h5>مراجع</h5>
+                            @foreach($arr_reference as $arr)
+                                <t>{{$arr}}&nbsp;&nbsp;</t>
+                            @endforeach
+                        </div>
                 </div>
                     <div class="row container">
                     <h5>خلاصه مقاله</h5>

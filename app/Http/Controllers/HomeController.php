@@ -49,6 +49,13 @@ class HomeController extends Controller
         }
 //views
         $views=$papers->views;
-        return view('paper' ,compact('papers','arr_affiliation','arr_name','arr_email','arr_keyword','views'));
+//references
+        $reference_ToBe=$papers->Refrence;
+        $exploded_reference=explode(',',$reference_ToBe);
+        $arr_reference=array();
+        foreach ($exploded_reference as $exploded_references){
+            array_push($arr_reference,$exploded_references);
+        }
+        return view('paper' ,compact('papers','arr_affiliation','arr_name','arr_email','arr_keyword','views','arr_reference'));
     }
 }
