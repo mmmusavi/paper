@@ -1,7 +1,7 @@
 @extends('layouts.dashboard_app')
 
 @section('content_title')
-    @if (!empty($volume))ویرایش  <span style="font-weight: 400;">{{$volume->name}}</span>@else افزودن شماره جدید @endif
+    @if (!empty($volume))ویرایش  <span style="font-weight: 400;">{{$volume->name}}</span>@else افزودن دسته شماره جدید @endif
 @endsection
 
 @section('content')
@@ -22,7 +22,7 @@
         </div>
     @endif
     <form class="form-horizontal" role="form" method="POST" action="@if (!empty($volume))
-    {{ url('/dashboard/volumes/edit/'.$id) }} @else {{ url('/dashboard/volumes/new') }} @endif">
+    {{ url('/dashboard/volumeCat/edit/'.$id) }} @else {{ url('/dashboard/volumeCat/new') }} @endif">
         {{ csrf_field() }}
 
         <div class="form-group">
@@ -31,23 +31,6 @@
             <div class="col-md-6">
                 <input id="name" type="text" class="form-control" name="name"
                        value="@if(!empty($volume)){{$volume->name}}@else{{old('name')}}@endif">
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="cat" class="col-md-2 control-label">والد</label>
-
-            <div class="col-md-6">
-                <select id="cat" class="form-control" name="cat">
-                    @foreach($cats as $cat)
-                        <option value="{{$cat->id}}"
-                                @if(!empty($volume))
-                                    @if($volume->cat==$cat->id)selected="selected"@endif
-                                @else
-                                    @if(old('cat')==$cat->id)selected="selected"@endif
-                                @endif>{{$cat->name}}</option>
-                    @endforeach
-                </select>
             </div>
         </div>
 

@@ -8,6 +8,56 @@ textarea{
     min-height: 100px!important;
     resize: vertical;
 }
+header{
+    background: url(assets/header.jpg);
+    height: 197px;
+    background-size: cover;
+    margin: auto;
+}
+.navbar-default {
+    background-color: #00a3b2;
+    border-color: #e7e7e7;
+    border: 0;
+}
+.navbar {
+    min-height: 60px;
+}
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+    color: #fff;
+}
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+    color: #fff;
+    background-color: #00b0c0;
+}
+.dropdown-menu>li>a {
+    line-height: 2.2;
+}
+.navbar-default .navbar-nav>li>a {
+    color: #ffe266;
+}
+.navbar-nav>li {
+    float: right;
+}
+.navbar-nav>li>a {
+    line-height: 30px;
+    font-size: 16px;
+}
+header h1{
+    margin: 0;
+    line-height: 197px;
+    font-size: 35px;
+    color: #00a3b2;
+}
+.panel-default>.panel-heading {
+    color: #fff;
+    background-color: #00a3b2;
+    border-color: #ddd;
+    line-height: 30px;
+    font-size: 15px;
+}
+.panel-heading a{
+    color: #fff;
+}
 footer{
     /*position: absolute;*/
     bottom: 0;

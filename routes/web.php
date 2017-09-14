@@ -44,6 +44,14 @@ Route::get('/dashboard/volumes/delete/{id}','DashboardController@DeleteVolume');
 Route::get('/dashboard/volumes/edit/{id}','DashboardController@EditVolumeShow');
 Route::post('/dashboard/volumes/edit/{id}','DashboardController@EditVolume');
 
+//volume_cat
+Route::get('/dashboard/volumeCat','DashboardController@volumeCatList');
+Route::get('/dashboard/volumeCat/new','DashboardController@NewvolumeCatShow');
+Route::post('/dashboard/volumeCat/new','DashboardController@NewvolumeCatPost');
+Route::get('/dashboard/volumeCat/delete/{id}','DashboardController@DeletevolumeCat');
+Route::get('/dashboard/volumeCat/edit/{id}','DashboardController@EditvolumeCatShow');
+Route::post('/dashboard/volumeCat/edit/{id}','DashboardController@EditvolumeCat');
+
 //affiliations
 Route::get('/dashboard/affiliations','DashboardController@AffiliationsList');
 Route::get('/dashboard/affiliations/delete/{id}','DashboardController@DeleteAffiliation');

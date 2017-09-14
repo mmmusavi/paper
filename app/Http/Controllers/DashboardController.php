@@ -262,7 +262,8 @@ class DashboardController extends Controller
     }
 
     public function NewVolumeShow(){
-        return view('dashboard.newvolume');
+        $cats=\App\VolumeCat::all();
+        return view('dashboard.newvolume',compact('cats'));
     }
 
     public function NewVolumePost(Request $request){
@@ -272,6 +273,7 @@ class DashboardController extends Controller
 
         $volume=new \App\Volume;
         $volume->name=$request['name'];
+        $volume->cat=$request['cat'];
         $volume->save();
 
         return redirect('/dashboard/volumes');
@@ -286,8 +288,9 @@ class DashboardController extends Controller
     }
 
     public function EditVolumeShow($id){
+        $cats=\App\VolumeCat::all();
         $volume=\App\Volume::find($id);
-        return view('dashboard.newvolume',compact(['volume','id']));
+        return view('dashboard.newvolume',compact(['volume','id','cats']));
     }
 
     public function EditVolume(Request $request,$id){
@@ -298,9 +301,62 @@ class DashboardController extends Controller
 
         $volume=\App\Volume::find($id);
         $volume->name=$request['name'];
+        $volume->cat=$request['cat'];
         $volume->save();
         \Session::flash('message','با موفقیت ویرایش شد.');
         return redirect('/dashboard/volumes/edit/'.$id);
+    }
+
+    //
+    //
+    // VOLUME_CAT
+    //
+    //
+    public function volumeCatList(){
+        $volumes=\App\VolumeCat::all();
+        return view('dashboard.volumecat',compact('volumes'));
+    }
+
+    public function NewvolumeCatShow(){
+        return view('dashboard.newvolumecat');
+    }
+
+    public function NewvolumeCatPost(Request $request){
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+
+        $volume=new \App\VolumeCat();
+        $volume->name=$request['name'];
+        $volume->save();
+
+        return redirect('/dashboard/volumeCat');
+    }
+
+    public function DeletevolumeCat($id){
+        $papers=\App\VolumeCat::find($id)->volumes;
+        if(count($papers)==0){
+            \App\VolumeCat::destroy($id);
+        }
+        return redirect('/dashboard/volumeCat');
+    }
+
+    public function EditvolumeCatShow($id){
+        $volume=\App\VolumeCat::find($id);
+        return view('dashboard.newvolumecat',compact(['volume','id']));
+    }
+
+    public function EditvolumeCat(Request $request,$id){
+
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+
+        $volume=\App\VolumeCat::find($id);
+        $volume->name=$request['name'];
+        $volume->save();
+        \Session::flash('message','با موفقیت ویرایش شد.');
+        return redirect('/dashboard/volumeCat/edit/'.$id);
     }
 
     //

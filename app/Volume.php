@@ -8,6 +8,9 @@ class Volume extends Model
 {
     protected $guarded=[];
     public function papers(){
-        return $this->hasMany('\App\Paper');
+        return $this->hasMany('App\Paper');
+    }
+    public function cat(){
+        return $this->belongsTo('App\VolumeCat','cat');
     }
 }
