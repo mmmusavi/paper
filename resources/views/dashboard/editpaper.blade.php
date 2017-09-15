@@ -112,6 +112,14 @@
         </div>
 
         <div class="form-group">
+            <label for="page" class="col-md-2 control-label">صفحه</label>
+
+            <div class="col-md-6">
+                <input id="page" type="text" class="form-control" name="page" value="{{old('page',$paper->page)}}">
+            </div>
+        </div>
+
+        <div class="form-group">
             <label class="col-md-2 control-label">فایل فعلی</label>
 
             <div class="col-md-6">

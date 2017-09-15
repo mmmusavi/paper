@@ -8,8 +8,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $volumes= \App\Volume::all();
-        return view('home',compact('volumes'));
+        return view('home');
     }
     public function ViewVolumePapers ($id){
         $papers=\App\Volume::find($id)->papers;

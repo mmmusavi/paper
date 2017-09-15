@@ -35,6 +35,15 @@
         </div>
 
         <div class="form-group">
+            <label for="desc" class="col-md-2 control-label">توضیحات</label>
+
+            <div class="col-md-6">
+                <input id="desc" type="text" class="form-control" name="desc"
+                       value="@if(!empty($volume)){{$volume->desc}}@else{{old('desc')}}@endif">
+            </div>
+        </div>
+
+        <div class="form-group">
             <label for="cat" class="col-md-2 control-label">والد</label>
 
             <div class="col-md-6">

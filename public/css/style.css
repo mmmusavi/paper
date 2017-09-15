@@ -117,3 +117,62 @@ footer{
 .instant_box a:last-child{
     margin-bottom: 0;
 }
+.panel-heading .accordion-toggle:after {
+    /* symbol for "opening" panels */
+    font-family: FontAwesome;  /* essential for enabling glyphicon */
+    content: "\f078";    /* adjust as needed, taken from bootstrap.css */
+    float: right;
+    margin-left: 10px;
+}
+.panel-heading .accordion-toggle.collapsed:after {
+    /* symbol for "collapsed" panels */
+    content: "\f053";    /* adjust as needed, taken from bootstrap.css */
+}
+.vol-panel{
+    border: 0;
+    box-shadow: none;
+}
+.vol-panel .panel-heading{
+    border-radius: 5px;
+    background-color: #446a6d!important;
+    border: 0;
+}
+.vol-panel .panel-body{
+    border: 0!important;
+}
+.vol-panel-desc{
+    display: block;
+    margin-bottom: 10px;
+}
+.vol-panel-a{
+    font-weight: 100;
+    font-size: 15px;
+}
+.vol-panel-a:hover{
+    text-decoration: none;
+}
+.bold{
+    font-weight: 400;
+}
+.about-ul{
+    padding-right: 20px;
+    list-style: none;
+}
+.about-ul li{
+margin-bottom: 10px;
+}
+.about-ul li:before {
+    font-family: FontAwesome;
+    content: "\f137";
+    color: #347ab7;
+    right: 30px;
+    position: absolute;
+}
+.about-ul li:last-child{
+    margin-bottom: 0;
+}
+.about-span{
+    font-weight: 400;
+    font-size: 16px;
+    color: #2a4669;
+}

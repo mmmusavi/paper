@@ -34,6 +34,8 @@ Route::get('/dashboard/papers/new','DashboardController@NewPaperShow');
 Route::post('/dashboard/papers/new','DashboardController@NewPaperPost');
 Route::get('/dashboard/papers/delete/{id}','DashboardController@DeletePaper');
 Route::get('/dashboard/papers/edit/{id}','DashboardController@EditPaperShow');
+Route::get('/dashboard/papers/up/{id}','DashboardController@PaperUp');
+Route::get('/dashboard/papers/down/{id}','DashboardController@PaperDown');
 Route::post('/dashboard/papers/edit/{id}','DashboardController@EditPaper');
 
 //volumes
@@ -42,6 +44,8 @@ Route::get('/dashboard/volumes/new','DashboardController@NewVolumeShow');
 Route::post('/dashboard/volumes/new','DashboardController@NewVolumePost');
 Route::get('/dashboard/volumes/delete/{id}','DashboardController@DeleteVolume');
 Route::get('/dashboard/volumes/edit/{id}','DashboardController@EditVolumeShow');
+Route::get('/dashboard/volumes/up/{id}','DashboardController@VolumeUp');
+Route::get('/dashboard/volumes/down/{id}','DashboardController@VolumeDown');
 Route::post('/dashboard/volumes/edit/{id}','DashboardController@EditVolume');
 
 //volume_cat
@@ -50,6 +54,8 @@ Route::get('/dashboard/volumeCat/new','DashboardController@NewvolumeCatShow');
 Route::post('/dashboard/volumeCat/new','DashboardController@NewvolumeCatPost');
 Route::get('/dashboard/volumeCat/delete/{id}','DashboardController@DeletevolumeCat');
 Route::get('/dashboard/volumeCat/edit/{id}','DashboardController@EditvolumeCatShow');
+Route::get('/dashboard/volumeCat/up/{id}','DashboardController@VolumeCatUp');
+Route::get('/dashboard/volumeCat/down/{id}','DashboardController@VolumeCatDown');
 Route::post('/dashboard/volumeCat/edit/{id}','DashboardController@EditvolumeCat');
 
 //affiliations

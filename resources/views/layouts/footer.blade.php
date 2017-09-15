@@ -1,6 +1,6 @@
 <footer class="footer">
     <div class="container">
-        <p class="text-muted">طراحی و توسعه توسط <a href="/">مشترک</a></p>
+        <p class="text-muted">سیستم مدیریت نشریه - طراحی و توسعه توسط <a href="/">گروه نرم افزاری آرتیسان</a></p>
     </div>
 </footer>
 

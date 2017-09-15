@@ -96,6 +96,14 @@
         </div>
 
         <div class="form-group">
+            <label for="page" class="col-md-2 control-label">صفحه</label>
+
+            <div class="col-md-6">
+                <input id="page" type="text" class="form-control" name="page" value="{{old('page')}}">
+            </div>
+        </div>
+
+        <div class="form-group">
             <label for="pdf" class="col-md-2 control-label">فایل pdf<span class="label-desc">حداکثر 8 مگابایت</span></label>
 
             <div class="col-md-6">

@@ -11,7 +11,7 @@
                             <li @if(\Request::is('dashboard'))class="active"@endif><a href="/dashboard"><i class="fa fa-dashboard"></i> داشبورد اصلی</a></li>
                             <li @if(\Request::is('dashboard/papers*'))class="active"@endif><a href="/dashboard/papers"><i class="fa fa-folder-open"></i> مدیریت مقالات</a></li>
                             <li @if(\Request::is('dashboard/volumeCat*'))class="active"@endif><a href="/dashboard/volumeCat"><i class="fa fa-reorder"></i> مدیریت دسته شماره‌های مجله</a></li>
-                            <li @if(\Request::is('dashboard/volumes*'))class="active"@endif><a href="/dashboard/volumes"><i class="fa fa-reorder"></i> مدیریت شماره‌های مجله</a></li>
+                            <li @if(\Request::is('dashboard/volumes*'))class="active"@endif><a href="/dashboard/volumes"><i class="fa fa-sticky-note"></i> مدیریت شماره‌های مجله</a></li>
                             <li @if(\Request::is('dashboard/affiliations*'))class="active"@endif><a href="/dashboard/affiliations"><i class="fa fa-university"></i> مدیریت وابستگی‌ها</a></li>
                             <li @if(\Request::is('dashboard/keywords*'))class="active"@endif><a href="/dashboard/keywords"><i class="fa fa-key"></i> مدیریت واژه‌های کلیدی</a></li>
                             <li @if(\Request::is('dashboard/users*'))class="active"@endif><a href="/dashboard/users"><i class="fa fa-users"></i> مدیریت کاربران</a></li>

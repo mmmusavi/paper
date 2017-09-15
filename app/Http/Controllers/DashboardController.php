@@ -33,7 +33,7 @@ class DashboardController extends Controller
     //
     //
     public function papersList(){
-        $papers=\App\Paper::all();
+        $papers=\App\Paper::orderBy('place','desc')->get();
         return view('dashboard.papers',compact('papers'));
     }
 
@@ -106,6 +106,9 @@ class DashboardController extends Controller
         $paper->keywords_order=$keywords_order;
         $paper->abstract=$request->abstract;
         $paper->volume_id=$request->volume_id;
+        $paper->page=$request->page;
+        $paper->save();
+        $paper->place=$paper->id;
         $paper->save();
 
         foreach ($keywords_id as $keyword){
@@ -123,10 +126,10 @@ class DashboardController extends Controller
             $paperUser->email=$email[$i];
             $paperUser->save();
         }
-
-        $extention=$request->file('pdf')->extension();
-        $request->file('pdf')->storeAs('PaperFiles',$paper->id.'.'.$extention);
-
+        if($request->hasFile('pdf')) {
+            $extention = $request->file('pdf')->extension();
+            $request->file('pdf')->storeAs('PaperFiles', $paper->id . '.' . $extention);
+        }
         return redirect('/dashboard/papers');
     }
 
@@ -153,6 +156,34 @@ class DashboardController extends Controller
         }
         $volumes=\App\Volume::all();
         return view('dashboard.editpaper',compact(['paper','id','volumes','authors','keywords']));
+    }
+
+    public function PaperUp($id){
+        $volume=\App\Paper::find($id);
+        $greater=\App\Paper::where('place','>',$volume->place)->orderBy('place','asc')->first();
+        if(count($greater)==1){
+            $new=$greater->place;
+            $old=$volume->place;
+            $volume->place=$new;
+            $greater->place=$old;
+            $volume->save();
+            $greater->save();
+        }
+        return redirect('/dashboard/papers');
+    }
+
+    public function PaperDown($id){
+        $volume=\App\Paper::find($id);
+        $least=\App\Paper::where('place','<',$volume->place)->orderBy('place','desc')->first();
+        if(count($least)==1){
+            $new=$least->place;
+            $old=$volume->place;
+            $volume->place=$new;
+            $least->place=$old;
+            $volume->save();
+            $least->save();
+        }
+        return redirect('/dashboard/papers');
     }
 
     public function EditPaper(Request $request,$id){
@@ -220,6 +251,7 @@ class DashboardController extends Controller
         $paper->keywords_order=$keywords_order;
         $paper->abstract=$request->abstract;
         $paper->volume_id=$request->volume_id;
+        $paper->page=$request->page;
         $paper->save();
 
         \App\PaperKeyword::where('paper_id',$id)->delete();
@@ -257,7 +289,7 @@ class DashboardController extends Controller
     //
     //
     public function volumesList(){
-        $volumes=\App\Volume::all();
+        $volumes=\App\Volume::orderBy('place','desc')->get();
         return view('dashboard.volumes',compact('volumes'));
     }
 
@@ -274,6 +306,9 @@ class DashboardController extends Controller
         $volume=new \App\Volume;
         $volume->name=$request['name'];
         $volume->cat=$request['cat'];
+        $volume->desc=$request['desc'];
+        $volume->save();
+        $volume->place=$volume->id;
         $volume->save();
 
         return redirect('/dashboard/volumes');
@@ -293,6 +328,34 @@ class DashboardController extends Controller
         return view('dashboard.newvolume',compact(['volume','id','cats']));
     }
 
+    public function VolumeUp($id){
+        $volume=\App\Volume::find($id);
+        $greater=\App\Volume::where('place','>',$volume->place)->orderBy('place','asc')->first();
+        if(count($greater)==1){
+            $new=$greater->place;
+            $old=$volume->place;
+            $volume->place=$new;
+            $greater->place=$old;
+            $volume->save();
+            $greater->save();
+        }
+        return redirect('/dashboard/volumes');
+    }
+
+    public function VolumeDown($id){
+        $volume=\App\Volume::find($id);
+        $least=\App\Volume::where('place','<',$volume->place)->orderBy('place','desc')->first();
+        if(count($least)==1){
+            $new=$least->place;
+            $old=$volume->place;
+            $volume->place=$new;
+            $least->place=$old;
+            $volume->save();
+            $least->save();
+        }
+        return redirect('/dashboard/volumes');
+    }
+
     public function EditVolume(Request $request,$id){
 
         $this->validate($request, [
@@ -302,6 +365,7 @@ class DashboardController extends Controller
         $volume=\App\Volume::find($id);
         $volume->name=$request['name'];
         $volume->cat=$request['cat'];
+        $volume->desc=$request['desc'];
         $volume->save();
         \Session::flash('message','با موفقیت ویرایش شد.');
         return redirect('/dashboard/volumes/edit/'.$id);
@@ -313,7 +377,7 @@ class DashboardController extends Controller
     //
     //
     public function volumeCatList(){
-        $volumes=\App\VolumeCat::all();
+        $volumes=\App\VolumeCat::orderBy('place','desc')->get();
         return view('dashboard.volumecat',compact('volumes'));
     }
 
@@ -328,6 +392,8 @@ class DashboardController extends Controller
 
         $volume=new \App\VolumeCat();
         $volume->name=$request['name'];
+        $volume->save();
+        $volume->place=$volume->id;
         $volume->save();
 
         return redirect('/dashboard/volumeCat');
@@ -344,6 +410,34 @@ class DashboardController extends Controller
     public function EditvolumeCatShow($id){
         $volume=\App\VolumeCat::find($id);
         return view('dashboard.newvolumecat',compact(['volume','id']));
+    }
+
+    public function VolumeCatUp($id){
+        $volume=\App\VolumeCat::find($id);
+        $greater=\App\VolumeCat::where('place','>',$volume->place)->orderBy('place','asc')->first();
+        if(count($greater)==1){
+            $new=$greater->place;
+            $old=$volume->place;
+            $volume->place=$new;
+            $greater->place=$old;
+            $volume->save();
+            $greater->save();
+        }
+        return redirect('/dashboard/volumeCat');
+    }
+
+    public function VolumeCatDown($id){
+        $volume=\App\VolumeCat::find($id);
+        $least=\App\VolumeCat::where('place','<',$volume->place)->orderBy('place','desc')->first();
+        if(count($least)==1){
+            $new=$least->place;
+            $old=$volume->place;
+            $volume->place=$new;
+            $least->place=$old;
+            $volume->save();
+            $least->save();
+        }
+        return redirect('/dashboard/volumeCat');
     }
 
     public function EditvolumeCat(Request $request,$id){
