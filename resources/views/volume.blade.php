@@ -1,30 +1,11 @@
+@php($lastVol=App\Volume::find($id))
+@php($lastVolCat=$lastVol->cat()->first())
+@php($breadcumb=$lastVolCat->name.'، '.$lastVol->name)
+@php($breadcumb_link=url()->current())
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-10">
-            <div class="panel panel-default">
-                <div class="panel-heading">مقالات</div>
-
-                <div class="panel-body">
-                    <table class="table text-center">
-                        <thead>
-                        <tr>
-                            <th class="text-center">نام</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                         @foreach($papers as $paper)
-                             <tr>
-                                 <td><a href="/paper/{{$paper->id}}">{{$paper->title}}</a></td>
-                             </tr>
-                         @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+    <div class="col-md-6">
+        @include('layouts.paperlist',['lastVolCat'=>$lastVolCat,'lastVol'=>$lastVol])
     </div>
-</div>
 @endsection

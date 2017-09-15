@@ -1,38 +1,31 @@
+@php($Vol=App\Volume::find($papers->volume_id))
+@php($VolCat=$Vol->cat()->first())
+@php($breadcumb=$VolCat->name.'، '.$Vol->name)
+@php($breadcumb_link='/volume/'.$Vol->id)
+@php($breadcumb2=$papers->title)
+@php($breadcumb2_link=url()->current())
 @extends('layouts.app')
-
 @section('content')
-    <div class="container">
+    <div class="col-md-6">
             <div class="panel panel-default">
-                    <div class="panel-heading">{{$papers->title}}</div>
                 <div class="panel-body">
-                    <div class="row">
-                   <div class="col-md-4">
-                       <h5>نویسندگان</h5>
-                    @for($i=0;$i<count($arr_name);++$i)
-                        <p>&nbsp;{{$arr_name[$i]}}&nbsp;&nbsp;({{$arr_affiliation[$i]}})&nbsp;&nbsp;&nbsp;&nbsp;{{$arr_email[$i]}}</p>
+                    <h1 class="paper-title">{{$papers->title}}</h1>
+                    <p>{{ $VolCat->name }}، {{ $Vol->name }}، {{ $Vol->desc }}</p>
+                    <h4>نویسندگان</h4>
+                    @for($i=0;$i<count($arr_name);$i++)
+                        <p>{{$arr_name[$i]}}، {{$arr_affiliation[$i]}}، {{$arr_email[$i]}}</p>
                     @endfor
-                   </div>
-                    <div class="col-md-2">
-                    <h5>کلمات کلیدی</h5>
-                    @foreach($arr_keyword as $arr)
-                        <t>{{$arr}}&nbsp;&nbsp;,</t>
-                    @endforeach
-                    </div>
-                    <div class="col-md-1">
-                        <h5>تعداد بازدید</h5>
-                        <p>{{$views}}</p>
-                    </div>
-                        <div class="col-md-5">
-                            <h5>مراجع</h5>
-                            @foreach($arr_reference as $arr)
-                                <t>{{$arr}}&nbsp;&nbsp;</t>
-                            @endforeach
-                        </div>
-                </div>
-                    <div class="row container">
-                    <h5>خلاصه مقاله</h5>
-                        <p>&nbsp;{{$papers->abstract}}</p>
-                    </div>
+                    <h4>چکیده</h4>
+                    <p style="text-align: justify;">{{$papers->abstract}}</p>
+                    <h4>کلیدواژه‌ها</h4>
+                    <p>@foreach($arr_keyword as $arr)
+                            {{$arr}} @if(!$loop->last); @endif
+                        @endforeach</p>
+                    <h4>آمار</h4>
+                    <p>تعداد بازدید: {{ta_persian_num($views)}}</p>
+            </div>
             </div>
     </div>
 @endsection
+@php($papers->views=$views+1)
+@php($papers->save())

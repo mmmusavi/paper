@@ -104,6 +104,14 @@
         </div>
 
         <div class="form-group">
+            <label for="price" class="col-md-2 control-label">قیمت به تومان</label>
+
+            <div class="col-md-6">
+                <input id="price" type="text" class="form-control" name="price" value="{{old('price')}}">
+            </div>
+        </div>
+
+        <div class="form-group">
             <label for="pdf" class="col-md-2 control-label">فایل pdf<span class="label-desc">حداکثر 8 مگابایت</span></label>
 
             <div class="col-md-6">

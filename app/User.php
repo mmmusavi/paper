@@ -35,6 +35,10 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Paper');
     }
 
+    public function cart(){
+        return $this->hasMany('App\Cart');
+    }
+
     public function isadmin(){
         $user=\Auth::user();
         $foundAdmin=0;

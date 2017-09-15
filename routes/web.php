@@ -15,7 +15,7 @@ Route::get('/home',function (){
     return redirect('/');
 });
 
-Route::get('/login','LoginController@show');
+Route::get('login',['as' => 'login', 'uses' => 'LoginController@show']);
 Route::post('/login','LoginController@checkUser');
 
 Route::get('/register','Auth\RegisterController@show');
@@ -93,3 +93,8 @@ Route::get('/paper/{id}','HomeController@ViewPaper');
 
 Route::get('/profile','ProfileController@index');
 Route::get('/profile/account','ProfileController@account');
+
+//add to cart
+Route::get('/addtocart/{id}','ProfileController@addtoCart');
+Route::get('/deleteCart/{id}','ProfileController@deleteCart');
+Route::get('/checkout','ProfileController@checkout');

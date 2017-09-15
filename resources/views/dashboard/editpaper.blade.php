@@ -120,6 +120,14 @@
         </div>
 
         <div class="form-group">
+            <label for="price" class="col-md-2 control-label">قیمت به تومان</label>
+
+            <div class="col-md-6">
+                <input id="price" type="text" class="form-control" name="price" value="{{old('price',$paper->price)}}">
+            </div>
+        </div>
+
+        <div class="form-group">
             <label class="col-md-2 control-label">فایل فعلی</label>
 
             <div class="col-md-6">

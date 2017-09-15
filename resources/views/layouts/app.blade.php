@@ -1,6 +1,24 @@
 @include('layouts.header')
 
 <div class="container">
+    @if(Session::has('buy_message'))
+        <div class="alert alert-success">
+            <ul>
+                <li>{{Session::get('buy_message')}}</li>
+            </ul>
+        </div>
+    @endif
+    @if(!empty($breadcumb))
+    <div class="row">
+        <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <a href="/">صفحه اصلی</a> <i class="fa fa-chevron-left"></i> <a href="{{$breadcumb_link}}">{{$breadcumb}}</a> @if(!empty($breadcumb2)) <i class="fa fa-chevron-left"></i> <a href="{{$breadcumb2_link}}">{{$breadcumb2}}</a> @endif
+            </div>
+        </div>
+        </div>
+    </div>
+    @endif
     <div class="row">
         <div class="col-md-3">
             <div class="panel panel-default">
@@ -35,24 +53,63 @@
             </div>
         </div>
         @yield('content')
-        <div class="col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">شناسنامه نشریه</div>
-                <div class="panel-body">
-                    <ul class="about-ul">
-                        <li>صاحب امتیاز<br><span class="about-span">ایران اندیش</span></li>
-                        <li>سردبیر<br><span class="about-span">کاظمی حقیقی</span></li>
-                        <li>مدیر داخلی<br><span class="about-span">کاظمی حقیقی</span></li>
-                        <li>مدیر اجرایی<br><span class="about-span">کاظمی حقیقی</span></li>
-                    </ul>
-                    <hr />
-                    <ul class="about-ul">
-                        <li>شاپا چاپی<span class="pull-left">2423-2526</span></li>
-                        <li>شاپا الکترونیکی<span class="pull-left">2423-2555</span></li>
-                    </ul>
+        @if(!\Request::is('paper*'))
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">شناسنامه نشریه</div>
+                    <div class="panel-body">
+                        <ul class="about-ul">
+                            <li>صاحب امتیاز<br><span class="about-span">ایران اندیش</span></li>
+                            <li>سردبیر<br><span class="about-span">کاظمی حقیقی</span></li>
+                            <li>مدیر داخلی<br><span class="about-span">کاظمی حقیقی</span></li>
+                            <li>مدیر اجرایی<br><span class="about-span">کاظمی حقیقی</span></li>
+                        </ul>
+                        <hr />
+                        <ul class="about-ul">
+                            <li>شاپا چاپی<span class="pull-left">2423-2526</span></li>
+                            <li>شاپا الکترونیکی<span class="pull-left">2423-2555</span></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
+        @else
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">دانلود این مقاله</div>
+                    <div class="panel-body">
+                        <p style="text-align: center; font-size: 16px;">قیمت این مقاله: {{ta_persian_num($papers->price)}} تومان</p>
+                        <a href="/addtocart/{{$papers->id}}" class="btn btn-success" style="width: 100%;">خرید</a>
+                        <hr />
+                        <ul class="about-ul">
+                            <li>تعداد دانلود این مقاله<span class="pull-left">{{ta_persian_num('16')}}</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        @endif
+        @if(!Auth::guest())
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">سبد خرید</div>
+                    <div class="panel-body">
+                        @php($carts=Auth::user()->cart()->get())
+                        @php($PriceSum=0)
+                        @foreach($carts as $cart)
+                            @php($thispaper=$cart->paper()->first())
+                            <p><a href="/deleteCart/{{$cart->id}}" title="حذف از سبد خرید"><i style="color:#da0000;" class="fa fa-remove"></i></a> <a href="/paper/{{$thispaper->id}}">{{$thispaper->title}} ({{ta_persian_num($thispaper->price)}} تومان)</a></p>
+                            @php($PriceSum=$PriceSum+$thispaper->price)
+                        @endforeach
+                        @if(count($carts)>0)
+                        <hr />
+                        <p>مجموع: <span class="pull-left bold">{{ta_persian_num($PriceSum)}} تومان</span></p>
+                        <a href="/checkout" class="btn btn-warning">تکمیل خرید</a>
+                        @else
+                            <p>سبد خرید شما خالی است.</p>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        @endif
     </div>
 </div>
 
