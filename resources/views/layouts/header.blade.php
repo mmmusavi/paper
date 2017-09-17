@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>نشریه هیجان اندیشه</title>
+    <title>مجله هیجان اندیشه</title>
 
     <link rel="stylesheet" href="{{ URL::asset('css/font-awesome.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}" type="text/css">
@@ -16,7 +16,7 @@
 <body id="app-layout">
 <div class="container">
     <header id="Intro">
-        <h1>نشریه علمی هیجان اندیشه</h1>
+        <h1>مجله هیجان اندیشه</h1>
     </header>
 </div>
 
@@ -42,8 +42,8 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="{{ url('/') }}">صفحه اصلی</a></li>
-                <li><a href="{{ url('/') }}">داوران</a></li>
-                <li><a href="{{ url('/') }}">درباره نشریه</a></li>
+                <li><a href="{{ url('/referees') }}">داوران</a></li>
+                <li><a href="{{ url('/AboutUs') }}">درباره نشریه</a></li>
                 <li><a href="{{ url('/') }}">تماس با ما</a></li>
             </ul>
 

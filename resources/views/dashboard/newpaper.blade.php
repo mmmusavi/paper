@@ -63,20 +63,20 @@
         </div>
 
         <div class="form-group">
-            <label for="keywords" class="col-md-2 control-label">کلمه‌های کلیدی<span class="label-desc">با کاراکتر ; جداکنید</span></label>
-
-            <div class="col-md-6">
-                <textarea id="keywords" class="form-control" placeholder="مثال: روانشناسی; روانپزشکی; کودکان"
-                          name="keywords">{{old('keywords')}}</textarea>
-            </div>
-        </div>
-
-        <div class="form-group">
             <label for="abstract" class="col-md-2 control-label">چکیده</label>
 
             <div class="col-md-6">
                 <textarea id="abstract" class="form-control"
                           name="abstract">{{old('abstract')}}</textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="keywords" class="col-md-2 control-label">کلمه‌های کلیدی<span class="label-desc">با کاراکتر ; جداکنید</span></label>
+
+            <div class="col-md-6">
+                <textarea id="keywords" class="form-control" placeholder="مثال: روانشناسی; روانپزشکی; کودکان"
+                          name="keywords">{{old('keywords')}}</textarea>
             </div>
         </div>
 

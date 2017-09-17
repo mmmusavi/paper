@@ -98,3 +98,11 @@ Route::get('/profile/account','ProfileController@account');
 Route::get('/addtocart/{id}','ProfileController@addtoCart');
 Route::get('/deleteCart/{id}','ProfileController@deleteCart');
 Route::get('/checkout','ProfileController@checkout');
+
+//editing referees and about
+Route::get('/dashboard/pages','DashboardController@pageIndex');
+Route::post('/dashboard/pages/post','DashboardController@EditPage');
+
+//showing referees and about us
+Route::get('referees','DashboardController@RefIndex');
+Route::get('AboutUs','DashboardController@RefIndex');
