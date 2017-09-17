@@ -38,7 +38,7 @@ class ProfileController extends Controller
         \Session::flash('buy_message','محصول مورد نظر از سبد خرید شما حذف شد.');
         return \Redirect::back();
     }
-    
+
     public function checkout(){
         return \Redirect::back();
     }

@@ -108,6 +108,7 @@ class DashboardController extends Controller
         $paper->volume_id=$request->volume_id;
         $paper->page=$request->page;
         $paper->price=$request->price;
+        $paper->text=$request->text;
         $paper->save();
         $paper->place=$paper->id;
         $paper->save();
@@ -254,6 +255,7 @@ class DashboardController extends Controller
         $paper->volume_id=$request->volume_id;
         $paper->page=$request->page;
         $paper->price=$request->price;
+        $paper->text=$request->text;
         $paper->save();
 
         \App\PaperKeyword::where('paper_id',$id)->delete();

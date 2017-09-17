@@ -97,6 +97,15 @@
         </div>
 
         <div class="form-group">
+            <label for="text" class="col-md-2 control-label">متن مقاله</label>
+
+            <div class="col-md-10">
+                <textarea id="text" class="form-control"
+                          name="text">{{old('text',$paper->text)}}</textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
             <label for="volume_id" class="col-md-2 control-label">مربوط به شماره</label>
 
             <div class="col-md-6">
@@ -150,3 +159,17 @@
         </div>
     </form>
 @endsection
+<script src="/js/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+        selector: '#text',
+        directionality : 'rtl',
+        font_formats: "Tahoma=IranSans,sans-serif;",
+        plugins: [
+            "advlist autolink link image lists charmap print preview hr anchor pagebreak",
+            "searchreplace wordcount visualblocks visualchars code insertdatetime media nonbreaking",
+            "table contextmenu directionality emoticons paste textcolor responsivefilemanager"
+        ],
+        toolbar: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect forecolor backcolor | link unlink anchor | image media | print preview code | ltr rtl "
+    });
+</script>
