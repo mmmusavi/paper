@@ -596,4 +596,35 @@ class DashboardController extends Controller
         }else $string.='<a href="#" data-number="'.$request->number.'" class="instant_link affiliation_select" data-affiliationid="0">موردی پیدا نشد. ایجاد شود؟</a>';
         return $string;
     }
+    //edit referees and about
+
+    public function pageIndex(){
+        $page =\App\Pages::first();
+        if(count($page)==0){
+            $page='';
+        }
+        return view('dashboard.pages',compact('page'));
+    }
+    public function EditPage(Request $request)
+    {
+    $check_page= \App\Pages::all();
+    if (count($check_page)==0){
+        $page = new \App\Pages();
+        $page->fill($request->all());
+        $page->save();
+    }
+    else {
+        $page =\App\Pages::first();
+        $page->fill($request->all());
+        $page->save();
+    }
+
+        return redirect('/dashboard/pages');
+    }
+  //referees and about us
+    public function RefIndex()
+    {   $text=\App\Pages::first();
+        return view('referees',compact('text'));
+    }
 }
+
