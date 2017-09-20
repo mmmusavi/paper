@@ -61,4 +61,33 @@ class HomeController extends Controller
         }
         return view('paper' ,compact('papers','arr_affiliation','arr_name','arr_email','arr_keyword','views','arr_reference'));
     }
+
+    //referees and about us and contact us
+    public function RefIndex()
+    {   $text=\App\Pages::first();
+        return view('referees',compact('text'));
+    }
+    public function AboutIndex()
+    {   $text=\App\Pages::first();
+        return view('AboutUs',compact('text'));
+    }
+    public function ContactIndex()
+    {   $text=\App\Pages::first();
+        $contact=\App\Contact::all();
+        return view('ContactUs',compact('text','contact'));
+    }
+    public function SendContact(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email',
+            'num' => 'required|numeric',
+            'txt' => 'required'
+        ]);
+        $contact = new \App\Contact();
+        $contact->fill($request->all());
+        $contact->save();
+        \Session::flash('message','با موفقیت ارسال شد.');
+        return redirect('ContactUs');
+    }
 }

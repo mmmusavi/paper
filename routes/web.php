@@ -104,12 +104,12 @@ Route::get('/dashboard/pages','DashboardController@pageIndex');
 Route::post('/dashboard/pages/post','DashboardController@EditPage');
 
 //showing referees and about us and contact us
-Route::get('referees','DashboardController@RefIndex');
-Route::get('AboutUs','DashboardController@AboutIndex');
-Route::get('ContactUs','DashboardController@ContactIndex');
+Route::get('referees','HomeController@RefIndex');
+Route::get('AboutUs','HomeController@AboutIndex');
+Route::get('ContactUs','HomeController@ContactIndex');
 
 //sending contact us
-Route::post('/dashboard/message/post','DashboardController@SendContact');
+Route::post('/dashboard/message/post','HomeController@SendContact');
 
 //showing messages sent from contact us page
 Route::get('/dashboard/messages','DashboardController@MessageShow');
