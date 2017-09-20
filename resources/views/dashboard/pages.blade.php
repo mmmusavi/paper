@@ -18,6 +18,7 @@
                           name="text-1">{{old('text-1',$page['text-1'])}}</textarea>
         </div>
     </div>
+
         <div class="form-group">
         <label for="text-2" class="col-md-2 control-label">درباره نشریه :</label>
 
@@ -26,6 +27,16 @@
                           name="text-2">{{old('text-2',$page['text-2'])}}</textarea>
         </div>
     </div>
+
+        <div class="form-group">
+        <label for="text-3" class="col-md-2 control-label">تماس با ما :</label>
+
+        <div class="col-md-12">
+                <textarea id="text-3" class="form-control"
+                          name="text-3">{{old('text-3',$page['text-3'])}}</textarea>
+        </div>
+        </div>
+
         <div class="form-group">
         <div class="col-md-6 col-md-offset-5">
             <button type="submit" class="btn btn-primary">ثبت</button>

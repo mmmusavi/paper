@@ -623,10 +623,37 @@ class DashboardController extends Controller
 
         return redirect('/dashboard/pages');
     }
-  //referees and about us
+  //referees and about us and contact us
     public function RefIndex()
     {   $text=\App\Pages::first();
         return view('referees',compact('text'));
+    }
+    public function AboutIndex()
+    {   $text=\App\Pages::first();
+        return view('AboutUs',compact('text'));
+    }
+    public function ContactIndex()
+    {   $text=\App\Pages::first();
+        $contact=\App\Contact::all();
+        return view('ContactUs',compact('text','contact'));
+    }
+    public function MessageShow()
+    {   $contact=\App\Contact::all();
+        return view('dashboard.messages',compact('contact'));
+    }
+
+    public function SendContact(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required','email' => 'required','num' => 'required','txt' => 'required'
+        ]);
+            $contact = new \App\Contact();
+            $contact->fill($request->all());
+            $contact->save();
+
+
+
+        return redirect('ContactUs');
     }
 }
 

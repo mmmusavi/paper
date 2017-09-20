@@ -16,6 +16,7 @@
                             <li @if(\Request::is('dashboard/keywords*'))class="active"@endif><a href="/dashboard/keywords"><i class="fa fa-key"></i> مدیریت واژه‌های کلیدی</a></li>
                             <li @if(\Request::is('dashboard/users*'))class="active"@endif><a href="/dashboard/users"><i class="fa fa-users"></i> مدیریت کاربران</a></li>
                             <li @if(\Request::is('dashboard/pages*'))class="active"@endif><a href="/dashboard/pages"><i class="fa fa-paste"></i> مدیریت صفحات</a></li>
+                            <li @if(\Request::is('dashboard/messages*'))class="active"@endif><a href="/dashboard/messages"><i class="fa fa-comment"></i> مشاهده پیام ها</a></li>
                         </ul>
                     </div>
                 </div>

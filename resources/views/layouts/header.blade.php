@@ -44,7 +44,7 @@
                 <li><a href="{{ url('/') }}">صفحه اصلی</a></li>
                 <li><a href="{{ url('/referees') }}">داوران</a></li>
                 <li><a href="{{ url('/AboutUs') }}">درباره نشریه</a></li>
-                <li><a href="{{ url('/') }}">تماس با ما</a></li>
+                <li><a href="{{ url('/ContactUs') }}">تماس با ما</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->

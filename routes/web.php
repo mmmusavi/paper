@@ -103,6 +103,13 @@ Route::get('/checkout','ProfileController@checkout');
 Route::get('/dashboard/pages','DashboardController@pageIndex');
 Route::post('/dashboard/pages/post','DashboardController@EditPage');
 
-//showing referees and about us
+//showing referees and about us and contact us
 Route::get('referees','DashboardController@RefIndex');
-Route::get('AboutUs','DashboardController@RefIndex');
+Route::get('AboutUs','DashboardController@AboutIndex');
+Route::get('ContactUs','DashboardController@ContactIndex');
+
+//sending contact us
+Route::post('/dashboard/message/post','DashboardController@SendContact');
+
+//showing messages sent from contact us page
+Route::get('/dashboard/messages','DashboardController@MessageShow');
