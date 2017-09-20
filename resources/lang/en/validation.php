@@ -65,7 +65,7 @@ return [
         'array'   => 'فیلد :attribute نباید کمتر از :min مورد باشد.',
     ],
     'not_in'               => 'فیلد selected :attribute is invalid.',
-    'numeric'              => 'فیلد :attribute باید be a number.',
+    'numeric'              => 'فیلد :attribute باید عدد باشد.',
     'present'              => 'فیلد :attribute field باید be present.',
     'regex'                => 'فیلد :attribute format is invalid.',
     'required'             => 'پرکردن فیلد :attribute الزامی است.',
@@ -125,6 +125,9 @@ return [
         'keywords' => 'کلمه‌های کلیدی',
         'abstract' => 'چکیده',
         'volume_id' => 'شماره',
+        'name' => 'نام',
+        'num' => 'شماره تماس',
+        'txt' => 'متن پیام',
     ],
 
 ];
