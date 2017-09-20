@@ -152,6 +152,41 @@
             </div>
         </div>
 
+        <fieldset class="form-group">
+            <legend style="padding-right:50px">شکل ها و جداول</legend>
+            <div class="form-group">
+                <label for="name_figure" class="col-md-2 control-label">نام جدول یا شکل</label>
+
+                <div class="col-md-6">
+                    <input id="name_figure" type="text" class="form-control" name="name_figure" value="{{old('name_figure',$figures->name)}}">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="caption_figure" class="col-md-2 control-label">کپشن</label>
+
+                <div class="col-md-6">
+                    <input id="caption_figure" type="text" class="form-control" name="caption_figure" value="{{old('caption_figure',$figures->caption)}}">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="url_figure" class="col-md-2 control-label">تصویر</label>
+
+                <div class="col-md-6">
+                    <input id="url_figure" type="text" class="form-control" name="url_figure" value="{{old('url_figure',$figures->url)}}">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="desc_figure" class="col-md-2 control-label">توضیح بیشتر</label>
+
+                <div class="col-md-6">
+                    <input id="desc_figure" type="text" class="form-control" name="desc_figure"  value="{{old('desc_figure',$figures->desc)}}">
+                </div>
+            </div>
+        </fieldset>
+
         <div class="form-group">
             <div class="col-md-6 col-md-offset-2">
                 <button type="submit" class="btn btn-primary">ثبت</button>

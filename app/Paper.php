@@ -27,4 +27,8 @@ class Paper extends Model
     public function keywords(){
         return $this->belongsToMany('App\Keyword','paper_keyword');
     }
+
+    public function figures(){
+        return $this->hasMany('App\Figure');
+    }
 }
