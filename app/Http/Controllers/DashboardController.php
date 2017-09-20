@@ -603,7 +603,7 @@ class DashboardController extends Controller
     public function pageIndex(){
         $page =\App\Pages::first();
         if(count($page)==0){
-            $page='';
+            $page=new \App\Pages;
         }
         return view('dashboard.pages',compact('page'));
     }
