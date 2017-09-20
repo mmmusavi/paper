@@ -11,7 +11,7 @@
         <tr>
             <th class="text-center">نام</th>
             <th class="text-center">پست الکترونیک</th>
-            <th class="text-center">شماره نلفن</th>
+            <th class="text-center">شماره تلفن</th>
             <th class="text-center">متن پیام</th>
         </tr>
         </thead>
