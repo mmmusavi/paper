@@ -27,10 +27,86 @@ $(document).ready(function(){
         $('.authors-div').last().after(selectAuthor);
     });
 
+    $('.add-figure').click(function (e) {
+        e.preventDefault();
+        var number=parseInt($('.fig-number').last().attr('data-number'))+1;
+        var selectFig='<div class="form-group figures-div" data-number="'+number+'">'+
+            '<label for="name_figure" class="col-md-2 control-label">نام جدول یا شکل<span class="label-desc">مثال: جدول 1</span></label>'+
+
+        '<div class="col-md-6">'+
+            '<input id="name_figure" type="text" data-number="'+number+'" class="form-control" name="name_figure[]">'+
+            '</div>'+
+            '<div class="col-md-2 noselect">'+
+            '<span class="fig-find">[figure-</span><span class="fig-find fig-number" data-number="'+number+'">'+number+'</span><span class="fig-find">]</span>'+
+            '</div>'+
+            '<div class="col-md-2" style="padding: 0">'+
+            '<a href="#" data-number="'+number+'" class="btn btn-danger remove-figure"><i class="fa fa-remove"></i> حذف</a>'+
+            '</div>'+
+            '</div>'+
+
+            '<div class="form-group figures-div" data-number="'+number+'">'+
+            '<label for="caption_figure" class="col-md-2 control-label">کپشن</label>'+
+
+            '<div class="col-md-6">'+
+            '<input id="caption_figure" type="text" data-number="'+number+'" class="form-control" name="caption_figure[]">'+
+            '</div>'+
+            '</div>'+
+
+            '<div class="form-group figures-div" data-number="'+number+'">'+
+            '<label for="url_figure1" class="col-md-2 control-label">تصویر</label>'+
+
+            '<div class="col-md-6">'+
+            '<input id="url_figure'+number+'" type="text" data-number="'+number+'" class="form-control" name="url_figure[]">'+
+            '</div>'+
+            '<a class="btn btn-default iframe-btn" type="button" href="/filemanager/dialog.php?type=1&subfolder=&editor=mce_0&lang=eng&fldr=&field_id=url_figure'+number+'">انتخاب</a>'+
+            '</div>'+
+
+            '<div class="form-group figures-div" data-number="'+number+'">'+
+            '<label for="desc_figure" class="col-md-2 control-label">توضیح بیشتر</label>'+
+
+        '<div class="col-md-6">'+
+            '<input id="desc_figure" type="text" data-number="'+number+'" class="form-control" name="desc_figure[]">'+
+            '</div>'+
+            '</div>';
+        $('.figures-div').last().after(selectFig);
+        $('.iframe-btn').fancybox({
+            'width'		: 900,
+            'height'	: 600,
+            'type'		: 'iframe',
+            'autoScale'    	: false
+        });
+    });
+
     $(document).on('click','.remove-author',function (e) {
         e.preventDefault();
         var number=$(this).attr('data-number');
         $('.authors-div[data-number="'+number+'"]').remove();
+    });
+
+    $(document).on('click','.remove-figure',function (e) {
+        e.preventDefault();
+        var number=$(this).attr('data-number');
+        $('.figures-div[data-number="'+number+'"]').remove();
+        var num=1;
+        $('.fig-number').each(function() {
+            $(this).html(num);
+            $(this).attr('data-number',num);
+            num=num+1;
+        });
+        var num2=1;
+        var num3=1;
+        $('.figures-div').each(function() {
+            $(this).attr('data-number',num2);
+            if(num3%4==0){
+                num2=num2+1;
+            }
+            num3=num3+1;
+        });
+        var num4=2;
+        $('.remove-figure').each(function() {
+            $(this).attr('data-number',num4);
+            num4=num4+1;
+        });
     });
 
     $(document).on('keyup','.get_profile',function () {
@@ -138,6 +214,13 @@ $(document).ready(function(){
                 $('.reference_place').html(response);
             }
         });
+    });
+
+    $('.fancy').fancybox({
+        'width'		: 900,
+        'height'	: 600,
+        'type'		: 'iframe',
+        'autoScale'    	: false
     });
 
 });

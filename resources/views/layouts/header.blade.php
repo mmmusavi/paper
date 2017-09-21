@@ -13,6 +13,12 @@
     @if(\Request::is('paper*'))
         <link rel="stylesheet" href="{{ URL::asset('css/balloon.css') }}" type="text/css">
     @endif
+    @if(\Request::is('dashboard*'))
+        <link rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
+    @else
+        <link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.min.css">
+    @endif
+
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
 
 </head>

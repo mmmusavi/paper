@@ -59,6 +59,11 @@ class HomeController extends Controller
         foreach ($references as $reference){
             $text=str_replace('['.$reference->find_id.']','<span class="ref_in_text" data-balloon-length="large" data-balloon="'.$reference->text.'" data-balloon-pos="up">['.ta_persian_num($reference->find_id).']</span>',$text);
         }
+//figures
+        $figures=$papers->figures;
+        foreach ($figures as $figure){
+            $text=str_replace('['.$figure->find_id.']','<div class="row figure-inline"><div class="col-md-3" style="text-align: center;"><a data-fancybox data-src="#figure'.$figure->id.'" href="javascript:;">برای مشاهده کلیک کنید</a></div><div class="col-md-9"><span class="bold">'.$figure->name.'.</span> '.$figure->caption.'</div></div><div style="display:none;" id="figure'.$figure->id.'"><div class="row" style="text-align: center; margin-bottom: 20px;"><span class="bold">'.$figure->name.'.</span> '.$figure->caption.'</div><div class="row" style="text-align: center; margin-bottom: 20px;"><img src="'.$figure->url.'" /></div><div class="row" style="text-align: center;"><p>'.$figure->desc.'</p></div></div>',$text);
+        }
         return view('paper' ,compact(['papers','text','arr_affiliation','arr_name','arr_email','arr_keyword','views','references']));
     }
 

@@ -133,15 +133,6 @@ class DashboardController extends Controller
             $extention = $request->file('pdf')->extension();
             $request->file('pdf')->storeAs('PaperFiles', $paper->id . '.' . $extention);
         }
-        //figures
-        $figure=new \App\Figure;
-        $figure->name=$request['name_figure'];
-        $figure->find_id=1;
-        $figure->caption=$request['caption_figure'];
-        $figure->url=$request['url_figure'];
-        $figure->desc=$request['desc_figure'];
-        $figure->paper_id=$paper->id;
-        $figure->save();
 
         $references = trim($request['references']);
         $references = explode("\n", $references);
@@ -157,6 +148,25 @@ class DashboardController extends Controller
                 $i++;
             }
         }
+
+        //figures
+        if(!empty($request['name_figure'][0])){
+            $name_figure=$request['name_figure'];
+            $caption_figure=$request['caption_figure'];
+            $url_figure=$request['url_figure'];
+            $desc_figure=$request['desc_figure'];
+            for($i=0;$i<=sizeof($request->name_figure)-1;$i++){
+                $figure=new \App\Figure;
+                $figure->name=$name_figure[$i];
+                $figure->find_id='figure-'.($i+1);
+                $figure->caption=$caption_figure[$i];
+                $figure->url=$url_figure[$i];
+                $figure->desc=$desc_figure[$i];
+                $figure->paper_id=$paper->id;
+                $figure->save();
+            }
+        }
+
 
         return redirect('/dashboard/papers');
     }
@@ -184,10 +194,7 @@ class DashboardController extends Controller
         }
         $volumes=\App\Volume::all();
         //figures
-        $figures=\App\Paper::find($id)->figures()->first();
-        if (count($figures)==0){
-            $figures = new \App\Figure();
-        }
+        $figures=\App\Paper::find($id)->figures;
 
         $refs=$paper->references;
         $references='';
@@ -336,6 +343,23 @@ class DashboardController extends Controller
                 $ref->save();
                 $i++;
             }
+        }
+
+        //figures
+        \App\Figure::where('paper_id',$id)->delete();
+        $name_figure=$request['name_figure'];
+        $caption_figure=$request['caption_figure'];
+        $url_figure=$request['url_figure'];
+        $desc_figure=$request['desc_figure'];
+        for($i=0;$i<=sizeof($request->name_figure)-1;$i++){
+            $figure=new \App\Figure;
+            $figure->name=$name_figure[$i];
+            $figure->find_id='figure-'.($i+1);
+            $figure->caption=$caption_figure[$i];
+            $figure->url=$url_figure[$i];
+            $figure->desc=$desc_figure[$i];
+            $figure->paper_id=$paper->id;
+            $figure->save();
         }
 
         \Session::flash('message','با موفقیت ویرایش شد.');

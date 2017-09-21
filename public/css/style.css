@@ -184,3 +184,22 @@ margin-bottom: 10px;
     color: #006acc;
     font-weight: 500;
 }
+.fig-find{
+    font-weight: 500;
+    color: red;
+    line-height: 30px;
+}
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently*/
+}
+.figure-inline{
+    display: block;
+    background:#e1e1e1;
+    margin: 10px;
+    padding: 10px;
+}
