@@ -188,7 +188,7 @@ class DashboardController extends Controller
         if (count($figures)==0){
             $figures = new \App\Figure();
         }
-        return view('dashboard.editpaper',compact(['paper','id','volumes','authors','keywords','figures']));
+
         $refs=$paper->references;
         $references='';
         $references_show='';
@@ -196,7 +196,7 @@ class DashboardController extends Controller
             $references.=$ref->text;
             $references_show.='<p style="margin-bottom: 5px;padding-bottom: 5px;border-bottom: 1px dashed #ccc;"><span class="bold" style="color: red;">['.ta_persian_num($ref->find_id).']</span> '.$ref->text.'</p>';
         }
-        return view('dashboard.editpaper',compact(['paper','id','volumes','authors','keywords','references','references_show']));
+        return view('dashboard.editpaper',compact(['paper','id','volumes','authors','keywords','references','references_show','figures']));
     }
 
     public function PaperUp($id){

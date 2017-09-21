@@ -36,3 +36,4 @@
     </div>
 
 @include('layouts.footer')
+@yield('other_js')
