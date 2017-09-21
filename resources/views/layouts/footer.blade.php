@@ -26,14 +26,18 @@
         $(document).ready(function() {
 
             $('.iframe-btn').fancybox({
-                'width'		: 900,
-                'height'	: 600,
                 'type'		: 'iframe',
+                iframe : {
+                    css : {
+                        width : '900px',
+                        height: '600px'
+                    }
+                },
                 'autoScale'    	: false
             });
         });
     </script>
-@endif
+    @endif
 {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
 </html>

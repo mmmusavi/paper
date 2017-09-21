@@ -98,7 +98,7 @@
                     @foreach($volumes as $volume)
                         <option value="{{$volume->id}}" @if(!empty($paper)){{ ($paper->volume_id == $volume->id ? "selected":"") }}
                                 @else{{ (old("volume_id") == $volume->id ? "selected":"") }}@endif>
-                            {{$volume->name}} - {{$volume->cat()->first()->name}} - {{$volume->name}}</option>
+                            {{$volume->cat()->first()->magazine->name}} - {{$volume->cat()->first()->name}} - {{$volume->name}}</option>
                     @endforeach
                 </select>
             </div>
