@@ -48,6 +48,7 @@ class DashboardController extends Controller
             'keywords' => 'required',
             'abstract' => 'required',
             'volume_id' => 'required',
+            'text' => 'required',
             'pdf' => 'max:8000|mimes:pdf',
         ]);
 
@@ -132,6 +133,22 @@ class DashboardController extends Controller
             $extention = $request->file('pdf')->extension();
             $request->file('pdf')->storeAs('PaperFiles', $paper->id . '.' . $extention);
         }
+
+        $references = trim($request['references']);
+        $references = explode("\n", $references);
+        $i=1;
+        foreach ($references as $key=>$reference){
+            $references[$key] = trim($references[$key]);
+            if (!empty($references[$key])){
+                $ref=new \App\Reference;
+                $ref->paper_id=$paper->id;
+                $ref->find_id=$i;
+                $ref->text=$reference;
+                $ref->save();
+                $i++;
+            }
+        }
+
         return redirect('/dashboard/papers');
     }
 
@@ -157,7 +174,14 @@ class DashboardController extends Controller
             }
         }
         $volumes=\App\Volume::all();
-        return view('dashboard.editpaper',compact(['paper','id','volumes','authors','keywords']));
+        $refs=$paper->references;
+        $references='';
+        $references_show='';
+        foreach ($refs as $ref){
+            $references.=$ref->text;
+            $references_show.='<p style="margin-bottom: 5px;padding-bottom: 5px;border-bottom: 1px dashed #ccc;"><span class="bold" style="color: red;">['.ta_persian_num($ref->find_id).']</span> '.$ref->text.'</p>';
+        }
+        return view('dashboard.editpaper',compact(['paper','id','volumes','authors','keywords','references','references_show']));
     }
 
     public function PaperUp($id){
@@ -281,6 +305,22 @@ class DashboardController extends Controller
         if($request->hasFile('pdf')){
             $extention=$request->file('pdf')->extension();
             $request->file('pdf')->storeAs('PaperFiles',$id.'.'.$extention);
+        }
+
+        \App\Reference::where('paper_id',$id)->delete();
+        $references = trim($request['references']);
+        $references = explode("\n", $references);
+        $i=1;
+        foreach ($references as $key=>$reference){
+            $references[$key] = trim($references[$key]);
+            if (!empty($references[$key])){
+                $ref=new \App\Reference;
+                $ref->paper_id=$paper->id;
+                $ref->find_id=$i;
+                $ref->text=$reference;
+                $ref->save();
+                $i++;
+            }
         }
 
         \Session::flash('message','با موفقیت ویرایش شد.');
@@ -596,6 +636,21 @@ class DashboardController extends Controller
                 $string.='<a href="#" data-number="'.$request->number.'" class="instant_link affiliation_select" data-affiliationid="'.$affiliation->id.'">'.$affiliation->name.'</a>';
             }
         }else $string.='<a href="#" data-number="'.$request->number.'" class="instant_link affiliation_select" data-affiliationid="0">موردی پیدا نشد. ایجاد شود؟</a>';
+        return $string;
+    }
+
+    public function DoRefs(Request $request){
+        $string='';
+        $references = trim($request->value);
+        $references = explode("\n", $references);
+        $i=1;
+        foreach ($references as $key=>$reference){
+            $references[$key] = trim($references[$key]);
+            if (!empty($references[$key])){
+                $string.='<p style="margin-bottom: 5px;padding-bottom: 5px;border-bottom: 1px dashed #ccc;"><span class="bold" style="color: red;">['.ta_persian_num($i).']</span> '.$reference.'</p>';
+                $i++;
+            }
+        }
         return $string;
     }
     //edit referees and about

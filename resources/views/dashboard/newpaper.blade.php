@@ -129,6 +129,18 @@
         </div>
 
         <div class="form-group">
+            <label for="references" class="col-md-2 control-label">مراجع</label>
+
+            <div class="col-md-5">
+                <textarea id="references" class="form-control references_new"
+                          name="references"
+                          style="height: 500px;">{{old('references')}}</textarea>
+            </div>
+
+            <div class="col-md-5 reference_place"></div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-6 col-md-offset-2">
                 <button type="submit" class="btn btn-primary">ثبت</button>
             </div>
@@ -143,7 +155,7 @@
     tinymce.init({
         selector: '#text',
         directionality : 'rtl',
-        font_formats: "Tahoma=IranSans,sans-serif;",
+        font_formats: "Tahoma=IransSans,sans-serif;",
         plugins: [
             "advlist autolink link image lists charmap print preview hr anchor pagebreak",
             "searchreplace wordcount visualblocks visualchars code insertdatetime media nonbreaking",

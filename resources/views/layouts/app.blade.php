@@ -106,28 +106,28 @@
                         </ul>
                     </div>
                 </div>
-            </div>
-            @if(!Auth::guest())
-                <div class="panel panel-default">
-                    <div class="panel-heading">سبد خرید</div>
-                    <div class="panel-body">
-                        @php($carts=Auth::user()->cart()->get())
-                        @php($PriceSum=0)
-                        @foreach($carts as $cart)
-                            @php($thispaper=$cart->paper()->first())
-                            <p><a href="/deleteCart/{{$cart->id}}" title="حذف از سبد خرید"><i style="color:#da0000;" class="fa fa-remove"></i></a> <a href="/paper/{{$thispaper->id}}">{{$thispaper->title}} ({{ta_persian_num($thispaper->price)}} تومان)</a></p>
-                            @php($PriceSum=$PriceSum+$thispaper->price)
-                        @endforeach
-                        @if(count($carts)>0)
-                            <hr />
-                            <p>مجموع: <span class="pull-left bold">{{ta_persian_num($PriceSum)}} تومان</span></p>
-                            <a href="/checkout" class="btn btn-warning">تکمیل خرید</a>
-                        @else
-                            <p>سبد خرید شما خالی است.</p>
-                        @endif
+                @if(!Auth::guest())
+                    <div class="panel panel-default">
+                        <div class="panel-heading">سبد خرید</div>
+                        <div class="panel-body">
+                            @php($carts=Auth::user()->cart()->get())
+                            @php($PriceSum=0)
+                            @foreach($carts as $cart)
+                                @php($thispaper=$cart->paper()->first())
+                                <p><a href="/deleteCart/{{$cart->id}}" title="حذف از سبد خرید"><i style="color:#da0000;" class="fa fa-remove"></i></a> <a href="/paper/{{$thispaper->id}}">{{$thispaper->title}} ({{ta_persian_num($thispaper->price)}} تومان)</a></p>
+                                @php($PriceSum=$PriceSum+$thispaper->price)
+                            @endforeach
+                            @if(count($carts)>0)
+                                <hr />
+                                <p>مجموع: <span class="pull-left bold">{{ta_persian_num($PriceSum)}} تومان</span></p>
+                                <a href="/checkout" class="btn btn-warning">تکمیل خرید</a>
+                            @else
+                                <p>سبد خرید شما خالی است.</p>
+                            @endif
+                        </div>
                     </div>
-                </div>
-            @endif
+                @endif
+            </div>
         @endif
 
     </div>

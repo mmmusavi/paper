@@ -78,6 +78,7 @@ Route::post('/dashboard/users/edit/{id}','DashboardController@EditUser');
 
 Route::post('/Process/GetProfile','DashboardController@GetProfile');
 Route::post('/Process/GetAffiliation','DashboardController@GetAffiliation');
+Route::post('/Process/DoRefs','DashboardController@DoRefs');
 
 Route::get('storage/PaperFiles/{filename}', function ($filename)
 {

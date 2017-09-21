@@ -5,7 +5,7 @@
         @foreach($lastPapers as $lastPaper)
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <p>{{ta_persian_num($loop->index+1)}}- <span class="bold">{{$lastPaper->title}}</span></p>
+                    <p>@if(0){{ta_persian_num($loop->index+1)}}- @endif<span class="bold">{{$lastPaper->title}}</span></p>
                     <p>{{ta_persian_num($lastPaper->page)}}</p>
                     @php
                         $authors=$lastPaper->authors_order;
@@ -23,7 +23,7 @@
                         @endforeach
                     </p>
                     <p>
-                        <a class="btn btn-default" href="/paper/{{$lastPaper->id}}"><i class="fa fa-link"></i> مشاهده مقاله</a>
+                        <a class="btn btn-default" href="/paper/{{$lastPaper->id}}"><i class="fa fa-file-text"></i> مشاهده مقاله</a>
                         <a class="btn btn-success" href="/addtocart/{{$lastPaper->id}}"><i class="fa fa-shopping-cart"></i> خرید مقاله</a>
                     </p>
                 </div>

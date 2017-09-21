@@ -123,4 +123,21 @@ $(document).ready(function(){
         }
     });
 
+    $('.references_new').keyup(function () {
+        var value=$(this).val();
+        var dataString = {
+            value: value
+        };
+        $.ajax
+        ({
+            headers: { 'X-CSRF-Token' : $('[name="_token"]').val() },
+            type: "POST",
+            url: "/Process/DoRefs",
+            data: dataString,
+            success: function (response) {
+                $('.reference_place').html(response);
+            }
+        });
+    });
+
 });
