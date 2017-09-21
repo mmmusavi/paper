@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddMonthYearToPapers extends Migration
+class AddMagidToVolumeCat extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class AddMonthYearToPapers extends Migration
      */
     public function up()
     {
-        Schema::table('papers', function (Blueprint $table) {
-            $table->integer('month');
-            $table->integer('year');
+        Schema::table('volume_cat', function (Blueprint $table) {
+            $table->integer('magazine_id');
         });
     }
 
@@ -26,7 +25,7 @@ class AddMonthYearToPapers extends Migration
      */
     public function down()
     {
-        Schema::table('papers', function (Blueprint $table) {
+        Schema::table('volume_cat', function (Blueprint $table) {
             //
         });
     }
