@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="{{ URL::asset('css/font-awesome.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}" type="text/css">
+    @if(\Request::is('paper*'))
+        <link rel="stylesheet" href="{{ URL::asset('css/balloon.css') }}" type="text/css">
+    @endif
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
 
 </head>

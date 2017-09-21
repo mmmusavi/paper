@@ -54,7 +54,12 @@ class HomeController extends Controller
         $views=$papers->views;
 //references
         $references=$papers->references;
-        return view('paper' ,compact('papers','arr_affiliation','arr_name','arr_email','arr_keyword','views','references'));
+//text
+        $text=$papers->text;
+        foreach ($references as $reference){
+            $text=str_replace('['.$reference->find_id.']','<span class="ref_in_text" data-balloon-length="large" data-balloon="'.$reference->text.'" data-balloon-pos="up">['.ta_persian_num($reference->find_id).']</span>',$text);
+        }
+        return view('paper' ,compact(['papers','text','arr_affiliation','arr_name','arr_email','arr_keyword','views','references']));
     }
 
     //referees and about us and contact us

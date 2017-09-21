@@ -21,6 +21,8 @@
                     <p>@foreach($arr_keyword as $arr)
                             {{$arr}} @if(!$loop->last); @endif
                         @endforeach</p>
+                    <h4>متن کامل مقاله</h4>
+                    {!! $text !!}
                     <h4>مراجع</h4>
                     @foreach($references as $reference)
                         <p>[{{ta_persian_num($reference->find_id)}}] {{$reference->text}}</p>
