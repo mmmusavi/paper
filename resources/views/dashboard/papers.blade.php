@@ -12,6 +12,7 @@
             <th class="text-center" width="10%">ترتیب</th>
             <th class="text-center">عنوان</th>
             <th class="text-center">مجله</th>
+            <th class="text-center">دسته</th>
             <th class="text-center">شماره</th>
             <th width="10%" class="text-center"></th>
         </tr>
@@ -21,7 +22,8 @@
             <tr>
                 <td class="text-center">{{ $loop->index+1 }}</td>
                 <td class="text-center">{{ $paper->title }}</td>
-                <td class="text-center">{{ $paper->magazine()->first()->name }}</td>
+                <td class="text-center">{{ $paper->volume()->first()->cat()->first()->magazine->name }}</td>
+                <td class="text-center">{{ $paper->volume()->first()->cat()->first()->name }}</td>
                 <td class="text-center">{{ $paper->volume()->first()->name }}</td>
                 <td class="text-center">
                     <a title="ویرایش" href="/dashboard/papers/edit/{{ $paper->id }}"><i class="fa fa-pencil-square"></i></a>

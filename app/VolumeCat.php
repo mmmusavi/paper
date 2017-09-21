@@ -10,4 +10,7 @@ class VolumeCat extends Model
     public function volumes(){
         return $this->hasMany('App\Volume','cat');
     }
+    public function magazine(){
+        return $this->belongsTo('App\Magazine');
+    }
 }

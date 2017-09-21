@@ -106,7 +106,7 @@
         </div>
 
         <div class="form-group">
-            <label for="volume_id" class="col-md-2 control-label">مربوط به شماره</label>
+            <label for="volume_id" class="col-md-2 control-label">مربوط به مجله و شماره</label>
 
             <div class="col-md-6">
                 <select id="volume_id" name="volume_id" class="form-control">
@@ -114,7 +114,7 @@
                     @foreach($volumes as $volume)
                         <option value="{{$volume->id}}" @if(!empty($paper)){{ ($paper->volume_id == $volume->id ? "selected":"") }}
                                 @else{{ (old("volume_id") == $volume->id ? "selected":"") }}@endif>
-                            {{$volume->name}}</option>
+                            {{$volume->cat()->first()->magazine->name}} - {{$volume->cat()->first()->name}} - {{$volume->name}}</option>
                     @endforeach
                 </select>
             </div>

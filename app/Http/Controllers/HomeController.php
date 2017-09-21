@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Paper;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -94,5 +95,11 @@ class HomeController extends Controller
         $contact->save();
         \Session::flash('message','با موفقیت ارسال شد.');
         return redirect('ContactUs');
+    }
+
+    public function search(Request $request){
+        $req=$request->search;
+        $lastPapers=Paper::where('title','LIKE','%'.$req.'%')->orWhere('text','LIKE','%'.$req.'%')->orWhere('abstract','LIKE','%'.$req.'%')->orderBy('place','desc')->get();
+        return view('search',compact(['lastPapers','req']));
     }
 }

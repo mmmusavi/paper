@@ -124,3 +124,5 @@ Route::post('/dashboard/message/post','HomeController@SendContact');
 
 //showing messages sent from contact us page
 Route::get('/dashboard/messages','DashboardController@MessageShow');
+
+Route::get('/search','HomeController@search');

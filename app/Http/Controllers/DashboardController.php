@@ -480,7 +480,8 @@ class DashboardController extends Controller
     }
 
     public function NewvolumeCatShow(){
-        return view('dashboard.newvolumecat');
+        $magazines=\App\Magazine::all();
+        return view('dashboard.newvolumecat',compact('magazines'));
     }
 
     public function NewvolumeCatPost(Request $request){
@@ -490,6 +491,7 @@ class DashboardController extends Controller
 
         $volume=new \App\VolumeCat();
         $volume->name=$request['name'];
+        $volume->magazine_id=$request['magazine_id'];
         $volume->save();
         $volume->place=$volume->id;
         $volume->save();
@@ -507,7 +509,8 @@ class DashboardController extends Controller
 
     public function EditvolumeCatShow($id){
         $volume=\App\VolumeCat::find($id);
-        return view('dashboard.newvolumecat',compact(['volume','id']));
+        $magazines=\App\Magazine::all();
+        return view('dashboard.newvolumecat',compact(['volume','id','magazines']));
     }
 
     public function VolumeCatUp($id){
@@ -546,6 +549,7 @@ class DashboardController extends Controller
 
         $volume=\App\VolumeCat::find($id);
         $volume->name=$request['name'];
+        $volume->magazine_id=$request['magazine_id'];
         $volume->save();
         \Session::flash('message','با موفقیت ویرایش شد.');
         return redirect('/dashboard/volumeCat/edit/'.$id);
@@ -581,7 +585,10 @@ class DashboardController extends Controller
     }
 
     public function Deletemagazine($id){
-        \App\Magazine::destroy($id);
+        $volCats=\App\Magazine::find($id)->volume_cats;
+        if(count($volCats)==0){
+            \App\Magazine::destroy($id);
+        }
         return redirect('/dashboard/magazines');
     }
 

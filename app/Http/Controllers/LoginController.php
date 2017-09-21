@@ -17,7 +17,7 @@ class LoginController extends Controller
         $email=$request['email'];
         $pass=$request['password'];
         if(Auth::attempt(['email'=>$email,'password'=>$pass])){
-            return redirect('dashboard');
+            return redirect('/');
         }
         else{
             $errors='اطلاعات وارد شده نادرست است.';
