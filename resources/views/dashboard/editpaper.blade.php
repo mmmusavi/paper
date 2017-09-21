@@ -106,21 +106,6 @@
         </div>
 
         <div class="form-group">
-            <label for="magazine_id" class="col-md-2 control-label">مربوط به مجله</label>
-
-            <div class="col-md-6">
-                <select id="magazine_id" name="magazine_id" class="form-control">
-                    <option disabled="disabled" selected>انتخاب کنید</option>
-                    @foreach($magazines as $magazine)
-                        <option value="{{$magazine->id}}" @if(!empty($paper)){{ ($paper->magazine_id == $magazine->id ? "selected":"") }}
-                                @else{{ (old("magazine_id") == $magazine->id ? "selected":"") }}@endif>
-                            {{$magazine->name}}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-
-        <div class="form-group">
             <label for="volume_id" class="col-md-2 control-label">مربوط به شماره</label>
 
             <div class="col-md-6">

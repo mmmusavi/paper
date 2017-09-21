@@ -111,7 +111,6 @@ class DashboardController extends Controller
         $paper->authors_order=$authors_order;
         $paper->keywords_order=$keywords_order;
         $paper->abstract=$request->abstract;
-        $paper->magazine_id=$request->magazine_id;
         $paper->year=$request->year;
         $paper->month=$request->month;
         $paper->volume_id=$request->volume_id;
@@ -310,7 +309,6 @@ class DashboardController extends Controller
         $paper->authors_order=$authors_order;
         $paper->keywords_order=$keywords_order;
         $paper->abstract=$request->abstract;
-        $paper->magazine_id=$request->magazine_id;
         $paper->year=$request->year;
         $paper->month=$request->month;
         $paper->volume_id=$request->volume_id;
