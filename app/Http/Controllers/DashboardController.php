@@ -39,7 +39,8 @@ class DashboardController extends Controller
 
     public function NewPaperShow(){
         $volumes=\App\Volume::all();
-        return view('dashboard.newpaper',compact('volumes'));
+        $magazines=\App\Magazine::all();
+        return view('dashboard.newpaper',compact(['volumes','magazines']));
     }
 
     public function NewPaperPost(Request $request){
@@ -47,8 +48,12 @@ class DashboardController extends Controller
             'title' => 'required',
             'keywords' => 'required',
             'abstract' => 'required',
+            'magazine_id' => 'required',
             'volume_id' => 'required',
             'text' => 'required',
+            'month' => 'required|numeric',
+            'year' => 'required|numeric',
+            'price' => 'numeric',
             'pdf' => 'max:8000|mimes:pdf',
         ]);
 
@@ -106,6 +111,9 @@ class DashboardController extends Controller
         $paper->authors_order=$authors_order;
         $paper->keywords_order=$keywords_order;
         $paper->abstract=$request->abstract;
+        $paper->magazine_id=$request->magazine_id;
+        $paper->year=$request->year;
+        $paper->month=$request->month;
         $paper->volume_id=$request->volume_id;
         $paper->page=$request->page;
         $paper->price=$request->price;
@@ -193,6 +201,7 @@ class DashboardController extends Controller
             }
         }
         $volumes=\App\Volume::all();
+        $magazines=\App\Magazine::all();
         //figures
         $figures=\App\Paper::find($id)->figures;
 
@@ -203,7 +212,7 @@ class DashboardController extends Controller
             $references.=$ref->text;
             $references_show.='<p style="margin-bottom: 5px;padding-bottom: 5px;border-bottom: 1px dashed #ccc;"><span class="bold" style="color: red;">['.ta_persian_num($ref->find_id).']</span> '.$ref->text.'</p>';
         }
-        return view('dashboard.editpaper',compact(['paper','id','volumes','authors','keywords','references','references_show','figures']));
+        return view('dashboard.editpaper',compact(['paper','id','volumes','magazines','authors','keywords','references','references_show','figures']));
     }
 
     public function PaperUp($id){
@@ -241,6 +250,9 @@ class DashboardController extends Controller
             'keywords' => 'required',
             'abstract' => 'required',
             'volume_id' => 'required',
+            'month' => 'required|numeric',
+            'year' => 'required|numeric',
+            'price' => 'numeric',
         ]);
 
         $paper=\App\Paper::find($id);
@@ -298,6 +310,9 @@ class DashboardController extends Controller
         $paper->authors_order=$authors_order;
         $paper->keywords_order=$keywords_order;
         $paper->abstract=$request->abstract;
+        $paper->magazine_id=$request->magazine_id;
+        $paper->year=$request->year;
+        $paper->month=$request->month;
         $paper->volume_id=$request->volume_id;
         $paper->page=$request->page;
         $paper->price=$request->price;
@@ -347,19 +362,21 @@ class DashboardController extends Controller
 
         //figures
         \App\Figure::where('paper_id',$id)->delete();
-        $name_figure=$request['name_figure'];
-        $caption_figure=$request['caption_figure'];
-        $url_figure=$request['url_figure'];
-        $desc_figure=$request['desc_figure'];
-        for($i=0;$i<=sizeof($request->name_figure)-1;$i++){
-            $figure=new \App\Figure;
-            $figure->name=$name_figure[$i];
-            $figure->find_id='figure-'.($i+1);
-            $figure->caption=$caption_figure[$i];
-            $figure->url=$url_figure[$i];
-            $figure->desc=$desc_figure[$i];
-            $figure->paper_id=$paper->id;
-            $figure->save();
+        if(!empty($request['name_figure'][0])){
+            $name_figure=$request['name_figure'];
+            $caption_figure=$request['caption_figure'];
+            $url_figure=$request['url_figure'];
+            $desc_figure=$request['desc_figure'];
+            for($i=0;$i<=sizeof($request->name_figure)-1;$i++){
+                $figure=new \App\Figure;
+                $figure->name=$name_figure[$i];
+                $figure->find_id='figure-'.($i+1);
+                $figure->caption=$caption_figure[$i];
+                $figure->url=$url_figure[$i];
+                $figure->desc=$desc_figure[$i];
+                $figure->paper_id=$paper->id;
+                $figure->save();
+            }
         }
 
         \Session::flash('message','با موفقیت ویرایش شد.');
@@ -534,6 +551,86 @@ class DashboardController extends Controller
         $volume->save();
         \Session::flash('message','با موفقیت ویرایش شد.');
         return redirect('/dashboard/volumeCat/edit/'.$id);
+    }
+
+
+    //
+    //
+    // MAGAZINES
+    //
+    //
+    public function magazineList(){
+        $magazines=\App\Magazine::orderBy('place','desc')->get();
+        return view('dashboard.magazines',compact('magazines'));
+    }
+
+    public function NewmagazineShow(){
+        return view('dashboard.newmagazine');
+    }
+
+    public function NewmagazinePost(Request $request){
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+
+        $volume=new \App\Magazine();
+        $volume->name=$request['name'];
+        $volume->save();
+        $volume->place=$volume->id;
+        $volume->save();
+
+        return redirect('/dashboard/magazines');
+    }
+
+    public function Deletemagazine($id){
+        \App\Magazine::destroy($id);
+        return redirect('/dashboard/magazines');
+    }
+
+    public function EditmagazineShow($id){
+        $volume=\App\Magazine::find($id);
+        return view('dashboard.newmagazine',compact(['volume','id']));
+    }
+
+    public function magazineUp($id){
+        $volume=\App\Magazine::find($id);
+        $greater=\App\Magazine::where('place','>',$volume->place)->orderBy('place','asc')->first();
+        if(count($greater)==1){
+            $new=$greater->place;
+            $old=$volume->place;
+            $volume->place=$new;
+            $greater->place=$old;
+            $volume->save();
+            $greater->save();
+        }
+        return redirect('/dashboard/magazines');
+    }
+
+    public function magazineDown($id){
+        $volume=\App\Magazine::find($id);
+        $least=\App\Magazine::where('place','<',$volume->place)->orderBy('place','desc')->first();
+        if(count($least)==1){
+            $new=$least->place;
+            $old=$volume->place;
+            $volume->place=$new;
+            $least->place=$old;
+            $volume->save();
+            $least->save();
+        }
+        return redirect('/dashboard/magazines');
+    }
+
+    public function Editmagazine(Request $request,$id){
+
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+
+        $volume=\App\Magazine::find($id);
+        $volume->name=$request['name'];
+        $volume->save();
+        \Session::flash('message','با موفقیت ویرایش شد.');
+        return redirect('/dashboard/magazines/edit/'.$id);
     }
 
     //

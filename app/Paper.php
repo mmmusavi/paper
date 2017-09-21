@@ -12,6 +12,10 @@ class Paper extends Model
         return $this->belongsTo('App\Volume');
     }
 
+    public function magazine(){
+        return $this->belongsTo('App\Magazine');
+    }
+
     public function users(){
         return $this->belongsToMany('App\User')->withPivot('affiliation_id')->withPivot('email');
     }

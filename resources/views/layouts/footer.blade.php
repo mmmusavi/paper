@@ -11,11 +11,10 @@
         <script src="{{ URL::asset('js/jquery.min.js') }}"></script>
         <script src="/js/jquery.fancybox.min.js"></script>
     @endif
-
+<script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
 <script src="{{ URL::asset('js/main.js') }}"></script>
 
     @if(\Request::is('dashboard*'))
-        <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
         <script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
         <script type="text/javascript">
             $(document).ready(function() {

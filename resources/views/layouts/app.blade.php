@@ -21,9 +21,11 @@
     @endif
     <div class="row">
         <div class="col-md-3">
+            @if(0)
             <div class="panel panel-default">
                 <div style="background: url(http://eot.ir/images/back1.jpg);width: 100%;height: 310px;"></div>
             </div>
+            @endif
             <div class="panel panel-default">
                 <div class="panel-heading">شماره‌های نشریه</div>
                 <div class="panel-body">
@@ -55,6 +57,7 @@
         @yield('content')
         @if(!\Request::is('paper*'))
             <div class="col-md-3">
+                @if(0)
                 <div class="panel panel-default">
                     <div class="panel-heading">شناسنامه نشریه</div>
                     <div class="panel-body">
@@ -71,6 +74,7 @@
                         </ul>
                     </div>
                 </div>
+                @endif
                 @if(!Auth::guest())
                     <div class="panel panel-default">
                         <div class="panel-heading">سبد خرید</div>

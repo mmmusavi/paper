@@ -24,7 +24,7 @@
                     </p>
                     <p>
                         <a class="btn btn-default" href="/paper/{{$lastPaper->id}}"><i class="fa fa-file-text"></i> مشاهده مقاله</a>
-                        <a class="btn btn-success" href="/addtocart/{{$lastPaper->id}}"><i class="fa fa-shopping-cart"></i> خرید مقاله</a>
+                        @if(0)<a class="btn btn-success" href="/addtocart/{{$lastPaper->id}}"><i class="fa fa-shopping-cart"></i> خرید مقاله</a>@endif
                     </p>
                 </div>
             </div>

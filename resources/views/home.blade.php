@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="col-md-6">
+        @if(0)
         <div class="panel panel-default">
             <div class="panel-body">
                 <ul>
@@ -15,6 +16,7 @@
                 </ul>
             </div>
         </div>
+        @endif
         @php($lastVolCat=App\VolumeCat::orderBy('place','desc')->first())
         @php($lastVol=$lastVolCat->volumes()->orderBy('place','desc')->first())
         @include('layouts.paperlist',['lastVolCat'=>$lastVolCat,'lastVol'=>$lastVol,'title'=>'شماره جاری:‌ '])

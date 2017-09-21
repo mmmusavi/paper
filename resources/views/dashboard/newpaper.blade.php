@@ -90,6 +90,21 @@
         </div>
 
         <div class="form-group">
+            <label for="magazine_id" class="col-md-2 control-label">مربوط به مجله</label>
+
+            <div class="col-md-6">
+                <select id="magazine_id" name="magazine_id" class="form-control">
+                    <option disabled="disabled" selected>انتخاب کنید</option>
+                    @foreach($magazines as $magazine)
+                        <option value="{{$magazine->id}}" @if(!empty($paper)){{ ($paper->magazine_id == $magazine->id ? "selected":"") }}
+                                @else{{ (old("magazine_id") == $magazine->id ? "selected":"") }}@endif>
+                            {{$magazine->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
             <label for="volume_id" class="col-md-2 control-label">مربوط به شماره</label>
 
             <div class="col-md-6">
@@ -117,6 +132,22 @@
 
             <div class="col-md-6">
                 <input id="price" type="text" class="form-control" name="price" value="{{old('price')}}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="year" class="col-md-2 control-label">سال</label>
+
+            <div class="col-md-6">
+                <input id="year" type="text" class="form-control" name="year" value="{{old('year')}}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="month" class="col-md-2 control-label">ماه</label>
+
+            <div class="col-md-6">
+                <input id="month" type="text" class="form-control" name="month" value="{{old('month')}}">
             </div>
         </div>
 
