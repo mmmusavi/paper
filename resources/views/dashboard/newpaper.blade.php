@@ -127,6 +127,40 @@
                 <input id="pdf" type="file" class="form-control" name="pdf">
             </div>
         </div>
+        <fieldset class="form-group">
+            <legend style="padding-right:50px">شکل ها و جداول</legend>
+        <div class="form-group">
+            <label for="name_figure" class="col-md-2 control-label">نام جدول یا شکل</label>
+
+            <div class="col-md-6">
+                <input id="name_figure" type="text" class="form-control" name="name_figure">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="caption_figure" class="col-md-2 control-label">کپشن</label>
+
+            <div class="col-md-6">
+                <input id="caption_figure" type="text" class="form-control" name="caption_figure">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="url_figure" class="col-md-2 control-label">تصویر</label>
+
+            <div class="col-md-6">
+                <input id="url_figure" type="text" class="form-control" name="url_figure">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="desc_figure" class="col-md-2 control-label">توضیح بیشتر</label>
+
+            <div class="col-md-6">
+                <input id="desc_figure" type="text" class="form-control" name="desc_figure">
+            </div>
+        </div>
+        </fieldset>
 
         <div class="form-group">
             <label for="references" class="col-md-2 control-label">مراجع</label>

@@ -133,6 +133,15 @@ class DashboardController extends Controller
             $extention = $request->file('pdf')->extension();
             $request->file('pdf')->storeAs('PaperFiles', $paper->id . '.' . $extention);
         }
+        //figures
+        $figure=new \App\Figure;
+        $figure->name=$request['name_figure'];
+        $figure->find_id=1;
+        $figure->caption=$request['caption_figure'];
+        $figure->url=$request['url_figure'];
+        $figure->desc=$request['desc_figure'];
+        $figure->paper_id=$paper->id;
+        $figure->save();
 
         $references = trim($request['references']);
         $references = explode("\n", $references);
@@ -174,6 +183,12 @@ class DashboardController extends Controller
             }
         }
         $volumes=\App\Volume::all();
+        //figures
+        $figures=\App\Paper::find($id)->figures()->first();
+        if (count($figures)==0){
+            $figures = new \App\Figure();
+        }
+        return view('dashboard.editpaper',compact(['paper','id','volumes','authors','keywords','figures']));
         $refs=$paper->references;
         $references='';
         $references_show='';
