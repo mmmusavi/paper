@@ -49,7 +49,7 @@
     <script src="/js/tinymce.min.js"></script>
     <script>
         tinymce.init({
-            selector: '#text',
+            selector: '.tinymce',
             directionality : 'rtl',
             plugins: [
                 "advlist autolink link image lists charmap print preview hr anchor pagebreak",
