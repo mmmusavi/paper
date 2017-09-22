@@ -11,6 +11,7 @@
         <tr>
             <th class="text-center" width="10%">ترتیب</th>
             <th class="text-center">عنوان</th>
+            <th class="text-center">مجله</th>
             <th width="10%" class="text-center"></th>
         </tr>
         </thead>
@@ -19,6 +20,7 @@
             <tr>
                 <td class="text-center">{{ $loop->index+1 }}</td>
                 <td class="text-center">{{ $volume->name }}</td>
+                <td class="text-center">{{ $volume->magazine->name }}</td>
                 <td class="text-center">
                     <a title="ویرایش" href="/dashboard/volumeCat/edit/{{ $volume->id }}"><i class="fa fa-pencil-square"></i></a>
                     <a title="بالا ببر" href="/dashboard/volumeCat/up/{{ $volume->id }}"><i class="fa fa-chevron-up"></i></a>

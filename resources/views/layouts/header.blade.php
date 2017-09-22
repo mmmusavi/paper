@@ -5,18 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>مجله هیجان اندیشه</title>
+    <title>مقالات روانشناسی</title>
 
     <link rel="stylesheet" href="{{ URL::asset('css/font-awesome.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}" type="text/css">
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    @if(\Request::is('paper*'))
+        <link rel="stylesheet" href="{{ URL::asset('css/balloon.css') }}" type="text/css">
+    @endif
+    {{--@if(\Request::is('dashboard*'))
+        <link rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
+    @else
+        <link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.min.css">
+    @endif--}}
+    <link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.min.css">
+    <link rel="icon" type="image/x-icon" href="/fav.png" />
 
 </head>
 <body id="app-layout">
+<div id="wrap">
+    <div id="main">
 <div class="container">
     <header id="Intro">
-        <h1>مجله هیجان اندیشه</h1>
+        <h1>مقالات روانشناسی</h1>
     </header>
 </div>
 
@@ -43,7 +54,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="{{ url('/') }}">صفحه اصلی</a></li>
                 <li><a href="{{ url('/referees') }}">داوران</a></li>
-                <li><a href="{{ url('/AboutUs') }}">درباره نشریه</a></li>
+                <li><a href="{{ url('/AboutUs') }}">درباره ما</a></li>
                 <li><a href="{{ url('/ContactUs') }}">تماس با ما</a></li>
             </ul>
 
@@ -72,3 +83,4 @@
         </div>
     </div>
 </nav>
+        <div class="container">

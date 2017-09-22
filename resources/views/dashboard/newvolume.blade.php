@@ -54,7 +54,7 @@
                                     @if($volume->cat==$cat->id)selected="selected"@endif
                                 @else
                                     @if(old('cat')==$cat->id)selected="selected"@endif
-                                @endif>{{$cat->name}}</option>
+                                @endif>{{$cat->name}} ({{$cat->magazine->name}})</option>
                     @endforeach
                 </select>
             </div>

@@ -35,6 +35,23 @@
         </div>
 
         <div class="form-group">
+            <label for="magazine_id" class="col-md-2 control-label">مجله</label>
+
+            <div class="col-md-6">
+                <select id="magazine_id" class="form-control" name="magazine_id">
+                    @foreach($magazines as $cat)
+                        <option value="{{$cat->id}}"
+                                @if(!empty($volume))
+                                @if($volume->magazine_id==$cat->id)selected="selected"@endif
+                                @else
+                                @if(old('magazine_id')==$cat->id)selected="selected"@endif
+                                @endif>{{$cat->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-6 col-md-offset-2">
                 <button type="submit" class="btn btn-primary">تایید</button>
             </div>

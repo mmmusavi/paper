@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Paper;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -53,13 +54,18 @@ class HomeController extends Controller
 //views
         $views=$papers->views;
 //references
-        $reference_ToBe=$papers->Refrence;
-        $exploded_reference=explode(',',$reference_ToBe);
-        $arr_reference=array();
-        foreach ($exploded_reference as $exploded_references){
-            array_push($arr_reference,$exploded_references);
+        $references=$papers->references;
+//text
+        $text=$papers->text;
+        foreach ($references as $reference){
+            $text=str_replace('['.$reference->find_id.']','<span class="ref_in_text" data-balloon-length="large" data-balloon="'.$reference->text.'" data-balloon-pos="up">['.ta_persian_num($reference->find_id).']</span>',$text);
         }
-        return view('paper' ,compact('papers','arr_affiliation','arr_name','arr_email','arr_keyword','views','arr_reference'));
+//figures
+        $figures=$papers->figures;
+        foreach ($figures as $figure){
+            $text=str_replace('['.$figure->find_id.']','<div class="row figure-inline"><div class="col-md-3" style="text-align: center;"><a data-fancybox data-src="#figure'.$figure->id.'" href="javascript:;">برای مشاهده کلیک کنید</a></div><div class="col-md-9"><span class="bold">'.$figure->name.'.</span> '.$figure->caption.'</div></div><div style="display:none;" id="figure'.$figure->id.'"><div class="row" style="text-align: center; margin-bottom: 20px;"><span class="bold">'.$figure->name.'.</span> '.$figure->caption.'</div><div class="row" style="text-align: center; margin-bottom: 20px;"><img src="'.$figure->url.'" /></div><div class="row" style="text-align: center;"><p>'.$figure->desc.'</p></div></div>',$text);
+        }
+        return view('paper' ,compact(['papers','text','arr_affiliation','arr_name','arr_email','arr_keyword','views','references']));
     }
 
     //referees and about us and contact us
@@ -89,5 +95,11 @@ class HomeController extends Controller
         $contact->save();
         \Session::flash('message','با موفقیت ارسال شد.');
         return redirect('ContactUs');
+    }
+
+    public function search(Request $request){
+        $req=$request->search;
+        $lastPapers=Paper::where('title','LIKE','%'.$req.'%')->orWhere('text','LIKE','%'.$req.'%')->orWhere('abstract','LIKE','%'.$req.'%')->orderBy('place','desc')->get();
+        return view('search',compact(['lastPapers','req']));
     }
 }

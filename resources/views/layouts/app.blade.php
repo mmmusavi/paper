@@ -1,6 +1,4 @@
 @include('layouts.header')
-
-<div class="container">
     @if(Session::has('buy_message'))
         <div class="alert alert-success">
             <ul>
@@ -8,6 +6,7 @@
             </ul>
         </div>
     @endif
+    @yield('searchbar')
     @if(!empty($breadcumb))
     <div class="row">
         <div class="col-md-12">
@@ -21,14 +20,16 @@
     @endif
     <div class="row">
         <div class="col-md-3">
+            @if(0)
             <div class="panel panel-default">
                 <div style="background: url(http://eot.ir/images/back1.jpg);width: 100%;height: 310px;"></div>
             </div>
+            @endif
             <div class="panel panel-default">
-                <div class="panel-heading">شماره‌های نشریه</div>
+                <div class="panel-heading">لیست مجلات</div>
                 <div class="panel-body">
                         <div class="panel-group" id="accordion">
-                            @foreach(\App\VolumeCat::orderBy('place','desc')->get() as $volume)
+                            @foreach(\App\Magazine::orderBy('place','desc')->get() as $volume)
                                 <div class="panel panel-default vol-panel">
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
@@ -39,9 +40,11 @@
                                     </div>
                                     <div id="collapse{{$volume->id}}" class="panel-collapse collapse @if($loop->first) in @endif">
                                         <div class="panel-body">
-                                            @foreach($volume->volumes()->orderBy('place','desc')->get() as $vol)
-                                                <a href="/volume/{{$vol->id}}"><i class="fa fa-sticky-note"></i> {{$vol->name}}</a>
-                                                <span class="vol-panel-desc" @if($loop->last) style="margin: 0; @endif">{{$vol->desc}}</span>
+                                            @foreach($volume->volume_cats()->orderBy('place','desc')->get() as $vol)
+                                                @foreach($vol->volumes()->orderBy('place','desc')->get() as $vol1)
+                                                <a href="/volume/{{$vol1->id}}"><i class="fa fa-sticky-note"></i> {{$vol->name}} - {{$vol1->name}}</a>
+                                                <span class="vol-panel-desc" @if($loop->last) style="margin: 0; @endif">{{$vol1->desc}}</span>
+                                                @endforeach
                                             @endforeach
                                         </div>
                                     </div>
@@ -53,6 +56,7 @@
             </div>
         </div>
         @yield('content')
+        @if(0)
         @if(!\Request::is('paper*'))
             <div class="col-md-3">
                 <div class="panel panel-default">
@@ -106,33 +110,29 @@
                         </ul>
                     </div>
                 </div>
-            </div>
-            @if(!Auth::guest())
-                <div class="panel panel-default">
-                    <div class="panel-heading">سبد خرید</div>
-                    <div class="panel-body">
-                        @php($carts=Auth::user()->cart()->get())
-                        @php($PriceSum=0)
-                        @foreach($carts as $cart)
-                            @php($thispaper=$cart->paper()->first())
-                            <p><a href="/deleteCart/{{$cart->id}}" title="حذف از سبد خرید"><i style="color:#da0000;" class="fa fa-remove"></i></a> <a href="/paper/{{$thispaper->id}}">{{$thispaper->title}} ({{ta_persian_num($thispaper->price)}} تومان)</a></p>
-                            @php($PriceSum=$PriceSum+$thispaper->price)
-                        @endforeach
-                        @if(count($carts)>0)
-                            <hr />
-                            <p>مجموع: <span class="pull-left bold">{{ta_persian_num($PriceSum)}} تومان</span></p>
-                            <a href="/checkout" class="btn btn-warning">تکمیل خرید</a>
-                        @else
-                            <p>سبد خرید شما خالی است.</p>
-                        @endif
+                @if(!Auth::guest())
+                    <div class="panel panel-default">
+                        <div class="panel-heading">سبد خرید</div>
+                        <div class="panel-body">
+                            @php($carts=Auth::user()->cart()->get())
+                            @php($PriceSum=0)
+                            @foreach($carts as $cart)
+                                @php($thispaper=$cart->paper()->first())
+                                <p><a href="/deleteCart/{{$cart->id}}" title="حذف از سبد خرید"><i style="color:#da0000;" class="fa fa-remove"></i></a> <a href="/paper/{{$thispaper->id}}">{{$thispaper->title}} ({{ta_persian_num($thispaper->price)}} تومان)</a></p>
+                                @php($PriceSum=$PriceSum+$thispaper->price)
+                            @endforeach
+                            @if(count($carts)>0)
+                                <hr />
+                                <p>مجموع: <span class="pull-left bold">{{ta_persian_num($PriceSum)}} تومان</span></p>
+                                <a href="/checkout" class="btn btn-warning">تکمیل خرید</a>
+                            @else
+                                <p>سبد خرید شما خالی است.</p>
+                            @endif
+                        </div>
                     </div>
-                </div>
-            @endif
+                @endif
+            </div>
         @endif
-
+        @endif
     </div>
-</div>
-
-
-
 @include('layouts.footer')

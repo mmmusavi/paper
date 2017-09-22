@@ -58,6 +58,16 @@ Route::get('/dashboard/volumeCat/up/{id}','DashboardController@VolumeCatUp');
 Route::get('/dashboard/volumeCat/down/{id}','DashboardController@VolumeCatDown');
 Route::post('/dashboard/volumeCat/edit/{id}','DashboardController@EditvolumeCat');
 
+//volume_cat
+Route::get('/dashboard/magazines','DashboardController@magazineList');
+Route::get('/dashboard/magazines/new','DashboardController@NewmagazineShow');
+Route::post('/dashboard/magazines/new','DashboardController@NewmagazinePost');
+Route::get('/dashboard/magazines/delete/{id}','DashboardController@Deletemagazine');
+Route::get('/dashboard/magazines/edit/{id}','DashboardController@EditmagazineShow');
+Route::get('/dashboard/magazines/up/{id}','DashboardController@magazineUp');
+Route::get('/dashboard/magazines/down/{id}','DashboardController@magazineDown');
+Route::post('/dashboard/magazines/edit/{id}','DashboardController@Editmagazine');
+
 //affiliations
 Route::get('/dashboard/affiliations','DashboardController@AffiliationsList');
 Route::get('/dashboard/affiliations/delete/{id}','DashboardController@DeleteAffiliation');
@@ -78,6 +88,7 @@ Route::post('/dashboard/users/edit/{id}','DashboardController@EditUser');
 
 Route::post('/Process/GetProfile','DashboardController@GetProfile');
 Route::post('/Process/GetAffiliation','DashboardController@GetAffiliation');
+Route::post('/Process/DoRefs','DashboardController@DoRefs');
 
 Route::get('storage/PaperFiles/{filename}', function ($filename)
 {
@@ -113,3 +124,5 @@ Route::post('/dashboard/message/post','HomeController@SendContact');
 
 //showing messages sent from contact us page
 Route::get('/dashboard/messages','DashboardController@MessageShow');
+
+Route::get('/search','HomeController@search');

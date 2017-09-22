@@ -31,4 +31,7 @@ class Paper extends Model
     public function figures(){
         return $this->hasMany('App\Figure');
     }
+    public function references(){
+        return $this->hasMany('App\Reference');
+    }
 }
