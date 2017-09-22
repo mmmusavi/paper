@@ -50,8 +50,8 @@ class DashboardController extends Controller
             'abstract' => 'required',
             'volume_id' => 'required',
             'text' => 'required',
-            'month' => 'required|numeric',
-            'year' => 'required|numeric',
+            'month' => 'numeric',
+            'year' => 'numeric',
             'price' => 'numeric',
             'pdf' => 'max:8000|mimes:pdf',
         ]);
@@ -248,8 +248,8 @@ class DashboardController extends Controller
             'keywords' => 'required',
             'abstract' => 'required',
             'volume_id' => 'required',
-            'month' => 'required|numeric',
-            'year' => 'required|numeric',
+            'month' => 'numeric',
+            'year' => 'numeric',
             'price' => 'numeric',
         ]);
 

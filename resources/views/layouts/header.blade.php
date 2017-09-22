@@ -27,7 +27,7 @@
     <div id="main">
 <div class="container">
     <header id="Intro">
-        <h1>مقالات روانشناسی</h1>
+        <h1>مقالات </h1>
     </header>
 </div>
 
@@ -53,7 +53,6 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="{{ url('/') }}">صفحه اصلی</a></li>
-                <li><a href="{{ url('/referees') }}">داوران</a></li>
                 <li><a href="{{ url('/AboutUs') }}">درباره ما</a></li>
                 <li><a href="{{ url('/ContactUs') }}">تماس با ما</a></li>
             </ul>
