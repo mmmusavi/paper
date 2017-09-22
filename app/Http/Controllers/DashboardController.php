@@ -48,7 +48,6 @@ class DashboardController extends Controller
             'title' => 'required',
             'keywords' => 'required',
             'abstract' => 'required',
-            'magazine_id' => 'required',
             'volume_id' => 'required',
             'text' => 'required',
             'month' => 'required|numeric',
