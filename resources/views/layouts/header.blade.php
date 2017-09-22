@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>مقالات روانشناسی</title>
+    <title>مقالات</title>
 
     <link rel="stylesheet" href="{{ URL::asset('css/font-awesome.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}" type="text/css">
@@ -53,6 +53,7 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="{{ url('/') }}">صفحه اصلی</a></li>
+                <li><a href="{{ url('/rules') }}">قوانین و‌ مقررات</a></li>
                 <li><a href="{{ url('/AboutUs') }}">درباره ما</a></li>
                 <li><a href="{{ url('/ContactUs') }}">تماس با ما</a></li>
             </ul>

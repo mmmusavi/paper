@@ -115,7 +115,7 @@ Route::get('/dashboard/pages','DashboardController@pageIndex');
 Route::post('/dashboard/pages/post','DashboardController@EditPage');
 
 //showing referees and about us and contact us
-Route::get('referees','HomeController@RefIndex');
+Route::get('rules','HomeController@RefIndex');
 Route::get('AboutUs','HomeController@AboutIndex');
 Route::get('ContactUs','HomeController@ContactIndex');
 

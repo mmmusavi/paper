@@ -50,9 +50,6 @@ class DashboardController extends Controller
             'abstract' => 'required',
             'volume_id' => 'required',
             'text' => 'required',
-            'month' => 'numeric',
-            'year' => 'numeric',
-            'price' => 'numeric',
             'pdf' => 'max:8000|mimes:pdf',
         ]);
 
@@ -90,20 +87,20 @@ class DashboardController extends Controller
         $paper=new \App\Paper;
         $paper->title=$request->title;
 
-        $keywords = explode(";", $request->keywords);
+        $keywords = explode("،", $request->keywords);
         $keywords_order='';
         $keywords_id=[];
         foreach ($keywords as $keyword){
             $checkkeyword=\App\Keyword::where('name',$keyword)->first();
             if(count($checkkeyword)>0){
-                $keywords_order.=$checkkeyword->id.';';
+                $keywords_order.=$checkkeyword->id.'،';
                 array_push($keywords_id,$checkkeyword->id);
             }else {
                 $newkeyword = new \App\Keyword;
                 $newkeyword->name = $keyword;
                 $newkeyword->save();
                 $newkeyword_id = $newkeyword->id;
-                $keywords_order .= $newkeyword_id . ';';
+                $keywords_order .= $newkeyword_id . '،';
                 array_push($keywords_id, $newkeyword_id);
             }
         }
@@ -112,6 +109,7 @@ class DashboardController extends Controller
         $paper->abstract=$request->abstract;
         $paper->year=$request->year;
         $paper->month=$request->month;
+        $paper->day=$request->day;
         $paper->volume_id=$request->volume_id;
         $paper->page=$request->page;
         $paper->price=$request->price;
@@ -191,11 +189,11 @@ class DashboardController extends Controller
             $user->email=$user->pivot->email;
         }
         $keywords='';
-        $allkeywords=explode(';',$paper->keywords_order);
+        $allkeywords=explode('،',$paper->keywords_order);
         foreach ($allkeywords as $allkeyword){
             if(!empty($allkeyword)){
                 $key=\App\Keyword::find($allkeyword);
-                $keywords.=$key->name.';';
+                $keywords.=$key->name.'،';
             }
         }
         $volumes=\App\Volume::all();
@@ -248,9 +246,6 @@ class DashboardController extends Controller
             'keywords' => 'required',
             'abstract' => 'required',
             'volume_id' => 'required',
-            'month' => 'numeric',
-            'year' => 'numeric',
-            'price' => 'numeric',
         ]);
 
         $paper=\App\Paper::find($id);
@@ -286,20 +281,20 @@ class DashboardController extends Controller
             }
         }
 
-        $keywords = explode(";", $request->keywords);
+        $keywords = explode("،", $request->keywords);
         $keywords_order='';
         $keywords_id=[];
         foreach ($keywords as $keyword){
             $checkkeyword=\App\Keyword::where('name',$keyword)->first();
             if(count($checkkeyword)>0){
-                $keywords_order.=$checkkeyword->id.';';
+                $keywords_order.=$checkkeyword->id.'،';
                 array_push($keywords_id,$checkkeyword->id);
             }else{
                 $newkeyword=new \App\Keyword;
                 $newkeyword->name=$keyword;
                 $newkeyword->save();
                 $newkeyword_id=$newkeyword->id;
-                $keywords_order.=$newkeyword_id.';';
+                $keywords_order.=$newkeyword_id.'،';
                 array_push($keywords_id,$newkeyword_id);
             }
         }
@@ -310,6 +305,7 @@ class DashboardController extends Controller
         $paper->abstract=$request->abstract;
         $paper->year=$request->year;
         $paper->month=$request->month;
+        $paper->day=$request->day;
         $paper->volume_id=$request->volume_id;
         $paper->page=$request->page;
         $paper->price=$request->price;

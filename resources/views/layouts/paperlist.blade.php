@@ -17,7 +17,7 @@
                 <div class="panel-body">
                     <p>@if(0){{ta_persian_num($loop->index+1)}}- @endif<span class="bold">{{$lastPaper->title}}</span></p>
                     <p>{{$lastPaper->volume()->first()->cat()->first()->magazine->name}}، {{$lastPaper->volume()->first()->cat()->first()->name}}، {{$lastPaper->volume()->first()->name}}</p>
-                    <p>صفحات {{ta_persian_num($lastPaper->page)}}</p>
+                    @if(!empty($lastPaper->page))<p>صفحات {{ta_persian_num($lastPaper->page)}}</p>@endif
                     @php
                         $authors=$lastPaper->authors_order;
                         $authors=substr($authors,0,strlen($authors)-1);

@@ -42,7 +42,7 @@ class HomeController extends Controller
         }
 //keyword
         $keyword=$papers->keywords_order;
-        $exploded_keywords=explode(';',$keyword);
+        $exploded_keywords=explode('،',$keyword);
         $arr_keyword=array();
         foreach ($exploded_keywords as $exploded_keyword){
             if(!empty($exploded_keyword)) {

@@ -19,7 +19,7 @@
                     <p style="text-align: justify;">{{$papers->abstract}}</p>
                     <h4>کلیدواژه‌ها</h4>
                     <p>@foreach($arr_keyword as $arr)
-                            {{$arr}} @if(!$loop->last); @endif
+                            {{$arr}} @if(!$loop->last)، @endif
                         @endforeach</p>
                     <h4>متن کامل مقاله</h4>
                     @if(!Auth::guest())

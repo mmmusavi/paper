@@ -72,10 +72,10 @@
         </div>
 
         <div class="form-group">
-            <label for="keywords" class="col-md-2 control-label">کلمه‌های کلیدی<span class="label-desc">با کاراکتر ; جداکنید</span></label>
+            <label for="keywords" class="col-md-2 control-label">کلمه‌های کلیدی<span class="label-desc">با کاراکتر ، جداکنید</span></label>
 
             <div class="col-md-6">
-                <textarea id="keywords" class="form-control" placeholder="مثال: روانشناسی; روانپزشکی; کودکان"
+                <textarea id="keywords" class="form-control" placeholder="مثال: روانشناسی، روانپزشکی، کودکان"
                           name="keywords">{{old('keywords')}}</textarea>
             </div>
         </div>
@@ -113,7 +113,7 @@
         </div>
 
         <div class="form-group">
-            <label for="price" class="col-md-2 control-label">قیمت به تومان</label>
+            <label for="price" class="col-md-2 control-label">قیمت به تومان<span class="label-desc">برای مقالات رایگان صفر وارد شود</span></label>
 
             <div class="col-md-6">
                 <input id="price" type="text" class="form-control" name="price" value="{{old('price')}}">
@@ -133,6 +133,14 @@
 
             <div class="col-md-6">
                 <input id="month" type="text" class="form-control" name="month" value="{{old('month')}}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="day" class="col-md-2 control-label">روز</label>
+
+            <div class="col-md-6">
+                <input id="day" type="text" class="form-control" name="day" value="{{old('day')}}">
             </div>
         </div>
 
@@ -159,7 +167,7 @@
         </div>
 
         <div class="form-group figures-div" data-number="1">
-            <label for="caption_figure" class="col-md-2 control-label">کپشن</label>
+            <label for="caption_figure" class="col-md-2 control-label">شرح</label>
 
             <div class="col-md-6">
                 <input id="caption_figure" type="text" data-number="1" class="form-control" name="caption_figure[]">
@@ -193,10 +201,10 @@
         </div>
 
         <div class="form-group">
-            <h4 class="col-md-8 col-md-offset-2" style="margin-bottom:5px; padding-bottom: 5px; border-bottom: 1px solid #ccc;">مراجع</h4>
+            <h4 class="col-md-8 col-md-offset-2" style="margin-bottom:5px; padding-bottom: 5px; border-bottom: 1px solid #ccc;">منابع</h4>
         </div>
         <div class="form-group">
-            <label for="references" class="col-md-2 control-label">مراجع</label>
+            <label for="references" class="col-md-2 control-label">منابع</label>
 
             <div class="col-md-5">
                 <textarea id="references" class="form-control references_new"

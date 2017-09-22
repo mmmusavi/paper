@@ -33,6 +33,7 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">ورود</button>
+                                <p class="pull-left">عضو نیستید؟ <a class="btn btn-success" href="/register">ثبت نام</a></p>
                             </div>
                         </div>
                     </form>

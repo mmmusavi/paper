@@ -53,6 +53,7 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">ثبت نام</button>
+                                <p class="pull-left">قبلا ثبت نام کردید؟ <a class="btn btn-success" href="/login">ورود</a></p>
                             </div>
                         </div>
                     </form>
