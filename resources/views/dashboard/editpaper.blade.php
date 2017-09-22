@@ -89,10 +89,9 @@
 
         <div class="form-group">
             <label for="keywords" class="col-md-2 control-label">کلمه‌های کلیدی<span class="label-desc">با کاراکتر ، جداکنید</span></label>
-            @php($keywords2=substr($keywords,0,strlen($keywords)-1))
             <div class="col-md-6">
                 <textarea id="keywords" class="form-control" placeholder="مثال: روانشناسی، روانپزشکی، کودکان"
-                          name="keywords">{{old('keywords',$keywords2)}}</textarea>
+                          name="keywords">{{old('keywords',substr($keywords,0,strlen($keywords)-2))}}</textarea>
             </div>
         </div>
 
@@ -164,7 +163,7 @@
             <label class="col-md-2 control-label">فایل فعلی</label>
 
             <div class="col-md-6">
-                <a target="_blank" href="{{asset('storage/PaperFiles/1.pdf')}}" class="btn btn-warning">مشاهده</a>
+                <a target="_blank" href="{{asset('storage/PaperFiles/'.$id.'.pdf')}}" class="btn btn-warning">مشاهده</a>
             </div>
         </div>
 

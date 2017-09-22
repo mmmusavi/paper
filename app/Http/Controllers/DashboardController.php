@@ -190,6 +190,7 @@ class DashboardController extends Controller
         }
         $keywords='';
         $allkeywords=explode('،',$paper->keywords_order);
+
         foreach ($allkeywords as $allkeyword){
             if(!empty($allkeyword)){
                 $key=\App\Keyword::find($allkeyword);

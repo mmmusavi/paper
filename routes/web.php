@@ -92,7 +92,7 @@ Route::post('/Process/DoRefs','DashboardController@DoRefs');
 
 Route::get('storage/PaperFiles/{filename}', function ($filename)
 {
-    $path = storage_path().'\\app\\PaperFiles\\'.$filename;
+    $path = storage_path().'/app/PaperFiles/'.$filename;
     return Response::download($path);
 });
 //volume page

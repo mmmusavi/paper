@@ -9,6 +9,13 @@
     <div class="col-md-9">
             <div class="panel panel-default">
                 <div class="panel-body">
+                    @if(File::exists(storage_path().'/app/PaperFiles/'.$papers->id.'.pdf'))
+                        @if(!Auth::guest())
+                            <a target="_blank" style="margin-bottom: 20px;" class="btn btn-danger pull-left" href="/storage/PaperFiles/{{$papers->id}}.pdf">دانلود فایل PDF</a>
+                        @else
+                            <p><a href="/login">برای دانلود فایل مقاله وارد شوید</a></p>
+                        @endif
+                    @endif
                     <h1 class="paper-title">{{$papers->title}}</h1>
                     <p>{{ $VolCat->magazine->name }}، {{ $VolCat->name }}، {{ $Vol->name }}، {{ $Vol->desc }}</p>
                     <h4>نویسندگان</h4>
